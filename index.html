@@ -1,78 +1,444 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="zh-CN">
 <head>
-    <title>遇见你之前，我不会写喜欢</title>
-    <style>
-        button {
-            padding: 10px 30px;
-            margin: 5px;
-            cursor: pointer;
-            background-color: #04AA6D;
-            color: white;
-            border: none;
-            border-radius: 5px;
-        }
-        .div-all {
-            width: 300px;
-            height: 500px;
-            padding: 10px;
-            margin: 10px;
-        }
-        .div-jpg {
-            width: 100%;
-            height: 80%;
-            max-width: 100%;
-            padding: 10px;
-            margin: 10px;
-            overflow: hidden;
-            object-fit: cover;
-            opacity: 0;
-        }
-        .div-mp4 {
-            width: 100%;
-            height: 20%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            text-align: center;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>遇见你之前，我不会写喜欢 — 一周年</title>
+<style>
+  :root {
+    --bg: #fdf8f3;
+    --card: #fffaf5;
+    --text: #3d3226;
+    --muted: #8a7b6b;
+    --accent: #c4734b;
+    --accent2: #d4956b;
+    --line: #e8d5c4;
+    --rose: #b8565a;
+    --gold: #c49a4b;
+    --shadow: 0 2px 20px rgba(60, 30, 10, 0.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1e1a16;
+      --card: #28231d;
+      --text: #e0d6c8;
+      --muted: #9a8b78;
+      --accent: #d4956b;
+      --accent2: #c4734b;
+      --line: #3a3028;
+      --shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #1e1a16;
+    --card: #28231d;
+    --text: #e0d6c8;
+    --muted: #9a8b78;
+    --accent: #d4956b;
+    --accent2: #c4734b;
+    --line: #3a3028;
+    --shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
 
-    </style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Noto Serif SC", "STSong", "SimSun", "Songti SC", "Hiragino Mincho ProN", serif;
+    line-height: 2;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+    background: radial-gradient(ellipse at center, var(--card) 0%, var(--bg) 70%);
+  }
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+    animation: fadeUp 1.8s ease-out;
+  }
+  .hero .sub {
+    font-size: 1.1rem;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    animation: fadeUp 1.8s ease-out 0.3s both;
+  }
+  .hero .days {
+    margin-top: 2.5rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    animation: fadeUp 1.8s ease-out 0.6s both;
+  }
+  .hero .days span {
+    font-size: 2.2rem;
+    color: var(--accent);
+    font-weight: 300;
+    display: block;
+    letter-spacing: 0.05em;
+  }
+  .scroll-hint {
+    position: absolute; bottom: 2rem;
+    color: var(--muted); font-size: 0.8rem;
+    animation: bounce 2s infinite;
+    cursor: default;
+  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+
+  /* ── Music Toggle ── */
+  .music-btn {
+    position: fixed; bottom: 2rem; right: 2rem; z-index: 999;
+    width: 48px; height: 48px; border-radius: 50%;
+    background: var(--card); border: 1px solid var(--line);
+    cursor: pointer; font-size: 1.3rem;
+    box-shadow: var(--shadow); transition: all 0.3s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .music-btn:hover { transform: scale(1.08); }
+  .music-btn.playing { border-color: var(--accent); }
+
+  /* ── Sections ── */
+  section { max-width: 720px; margin: 0 auto; padding: 5rem 2rem; }
+  .section-title {
+    text-align: center; font-size: 1.4rem; font-weight: 400;
+    color: var(--accent); letter-spacing: 0.15em;
+    margin-bottom: 3rem;
+  }
+  .section-title::after {
+    content: ''; display: block; width: 40px; height: 1px;
+    background: var(--line); margin: 1rem auto 0;
+  }
+
+  /* ── Timeline ── */
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 1px; background: var(--line);
+  }
+  .tl-item { position: relative; margin-bottom: 3rem; }
+  .tl-item::before {
+    content: ''; position: absolute; left: -2.35rem; top: 0.7rem;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--accent2); border: 2px solid var(--bg);
+  }
+  .tl-date { font-size: 0.85rem; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 0.3rem; }
+  .tl-title { font-size: 1.15rem; color: var(--accent); margin-bottom: 0.5rem; font-weight: 400; }
+  .tl-text { font-size: 0.95rem; color: var(--text); line-height: 2; }
+  .tl-text em { color: var(--rose); font-style: normal; }
+
+  /* ── Quote card ── */
+  .quote-card {
+    background: var(--card); border: 1px solid var(--line);
+    padding: 2.5rem 2rem; border-radius: 4px;
+    box-shadow: var(--shadow); margin: 2rem 0;
+  }
+  .quote-card p { font-size: 1rem; line-height: 2.2; text-indent: 2em; margin-bottom: 1rem; }
+  .quote-card .sig { text-align: right; color: var(--muted); font-size: 0.9rem; margin-top: 1.5rem; }
+
+  /* ── Side-by-side letters ── */
+  .letters { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+  @media (min-width: 700px) { .letters { grid-template-columns: 1fr 1fr; } }
+  .letter {
+    background: var(--card); border: 1px solid var(--line);
+    padding: 2rem; border-radius: 4px; box-shadow: var(--shadow);
+  }
+  .letter .from { font-size: 0.85rem; color: var(--muted); margin-bottom: 1.5rem; text-align: center; letter-spacing: 0.1em; }
+  .letter p { font-size: 0.95rem; line-height: 2; margin-bottom: 0.8rem; }
+
+  /* ── Poem ── */
+  .poem { text-align: center; line-height: 2.4; }
+  .poem p { margin-bottom: 0.3rem; font-size: 1rem; }
+  .poem .stanza-break { height: 1rem; }
+
+  /* ── Music Gallery ── */
+  .song-list { display: grid; gap: 1.2rem; }
+  .song-card {
+    background: var(--card); border: 1px solid var(--line);
+    padding: 1.5rem; border-radius: 4px;
+    display: flex; align-items: center; gap: 1.2rem;
+    box-shadow: var(--shadow); cursor: pointer;
+    transition: border-color 0.3s;
+  }
+  .song-card:hover { border-color: var(--accent2); }
+  .song-card .play-icon {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--accent); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; flex-shrink: 0;
+  }
+  .song-card .song-info .song-name { font-size: 1rem; color: var(--text); }
+  .song-card .song-info .song-desc { font-size: 0.8rem; color: var(--muted); margin-top: 0.2rem; }
+
+  /* ── Finale ── */
+  .finale {
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center;
+    padding: 2rem;
+  }
+  .finale h2 {
+    font-size: clamp(1.6rem, 4vw, 2.5rem);
+    font-weight: 400; color: var(--accent);
+    letter-spacing: 0.1em; margin-bottom: 1.5rem;
+    animation: fadeUp 1.5s ease-out;
+  }
+  .finale .big-date {
+    font-size: 3rem; color: var(--rose); font-weight: 300;
+    letter-spacing: 0.08em; margin: 1.5rem 0;
+    animation: fadeUp 1.5s ease-out 0.3s both;
+  }
+  .finale .closing {
+    font-size: 1rem; color: var(--muted); line-height: 2.2;
+    max-width: 500px; animation: fadeUp 1.5s ease-out 0.6s both;
+  }
+
+  /* ── Image placeholders ── */
+  .img-spot {
+    width: 100%; max-width: 400px; margin: 2rem auto;
+    aspect-ratio: 4/3; background: var(--card);
+    border: 1px dashed var(--line); border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted); font-size: 0.8rem;
+  }
+
+  /* ── Footer ── */
+  footer { text-align: center; padding: 3rem 2rem; color: var(--muted); font-size: 0.8rem; letter-spacing: 0.1em; }
+</style>
 </head>
 <body>
-<div class="div-all">
-<!--    <div class="div-jpg">-->
-<!--        <img src="1.jpg" alt="图片1">-->
-<!--        <img src="2.jpg" alt="图片2">-->
-<!--    </div>-->
-    <div class="div-mp4">
-        <audio id="audio-media" controls>
-            <source src="before_you_love_was_unwritten.mp3" type="audio/mpeg">
-            您的浏览器不支持音频元素。
-        </audio>
-        <div>
-            <button onclick="playAudio()">播放</button>
-            <button onclick="pauseAudio()">暂停</button>
-            <button onclick="stopAudio()">停止</button>
-        </div>
+
+<!-- ════════════ HERO ════════════ -->
+<section class="hero">
+  <h1>遇见你之前<br>我不会写喜欢</h1>
+  <p class="sub">胡昊 &amp; 高嘉阳 · 一周年</p>
+  <div class="days">
+    <span id="dayCount">…</span>
+    从相识到现在
+  </div>
+  <div class="scroll-hint">↓ 向下翻阅我们的故事</div>
+</section>
+
+<!-- ════════════ 初见 ════════════ -->
+<section>
+  <div class="section-title">第一章 · 初见</div>
+  <div class="quote-card">
+    <p>我现在还记得第一次见你的每个细节，你从舅舅的身侧出现，舅舅开心的搂着你和我讲："你看她也来了"。她是谁？我应该认识吗？为什么也喊舅舅，哪里跳出来的？</p>
+    <p>我尴尬和你打招呼，你热情的回应了我，好像我们本来认识一样。灯光照在你脸上，<em>像主角登场</em>。我是一个只有一句台词的小角色，蜷缩在你的明媚下，用疲惫把我包裹了起来，小心翼翼的隐藏我的尴尬。</p>
+    <p>早就不记得这间寺庙的名字，不是翻手机也记不得拍了这些漂亮的花花草草。只记得这个塔有点斜，这个铃铛和你。</p>
+    <div class="sig">—— 2025年8月，山西</div>
+  </div>
+</section>
+
+<!-- ════════════ 动心 ════════════ -->
+<section>
+  <div class="section-title">第二章 · 动心</div>
+  <div class="quote-card">
+    <p>亲爱的，你刚刚问我真的有一见钟情吗？我一直在想。</p>
+    <p>我的答案是：<em>是的，我对你确乎是一见钟情。</em>当我看见你的喜怒哀乐，看见你的疲惫憔悴，看见墙里的真实的你，就无法自拔的爱上你了。</p>
+    <p>无数次回忆那天与你相处的每一个细节，企图确认动心的那一瞬间。佛国寺与你独处的欣喜，你的笑影迟迟无法散去。想开口留你在副驾导航的内心独白与那辆车走散的失落。壁画博物馆的北齐风流和你的衣袂。</p>
+    <p>高嘉阳，我对你一见钟情。</p>
+    <div class="sig">—— 2025年9月13日</div>
+  </div>
+</section>
+
+<!-- ════════════ 南京 ════════════ -->
+<section>
+  <div class="section-title">第三章 · 南京落日</div>
+  <div class="quote-card">
+    <p>26岁，在南京看到了最美的落日，见到了最想见的人儿。</p>
+    <p>她比记忆中的还要可爱，会偷偷藏在机场，期待我去发现，算盘落空后会奔向我呼唤我。</p>
+    <p>比我记忆中的还要美丽，眼睛像大海的漩涡，让我一刻都舍不得挪开，一刻都舍不得松开牵她的手。</p>
+    <p>和记忆中一样潇洒有范，灯光下，光栅内，微笑，摇曳，盘头，捻足，每一个动作都恰到好处，<em>是superstar，是我的缪斯。</em></p>
+    <div class="sig">—— 2025年10月24日</div>
+  </div>
+</section>
+
+<!-- ════════════ 她的信 ════════════ -->
+<section>
+  <div class="section-title">第四章 · 她的来信</div>
+  <div class="letters">
+    <div class="letter">
+      <div class="from">📨 高嘉阳 · 2026年3月24日</div>
+      <p><em>我比我以为的，还要爱你。</em></p>
+      <p>兜兜转转，今天是我们在一起的第226天，我们认识的第233天。7个月的时间好像并没有磨平我们的爱意，反而让我在深夜因为喷涌而来的思念哭到无法入睡。</p>
+      <p>35岁的年纪，我才没有想过我会因为一个男孩子哭到失眠。35岁的年纪，我才不会承认因为思念一遍遍泪流满面。</p>
+      <p>这7个月走来，我担心过我们因为年龄问题无法彼此成全互为后盾；害怕过因为地域问题不能举案齐眉相敬如宾；也陷入过因为世俗观点无法携手向前同甘共苦的循环假设中自我折磨看不到尽头。</p>
+      <p>因为在爱情里，我恰恰是一个毫无安全感又害怕受伤害的小朋友。</p>
+      <p>你说这一次的相处，让你想明白一件事，就算我没有给你承诺，你也要做选择，哪怕没有结果，你也要努力。</p>
+      <p>而我，好像直到昨天晚上帮你做了选择之后才恍神，原来很多答案其实早就有了，是我一直没有发现。</p>
+      <p><em>我比我察觉到的，还要爱你。</em></p>
+      <p>是的，因为此刻我无比笃定，我比我以为的，还要爱你。</p>
+      <div class="sig">—— 爱你的小白</div>
     </div>
-</div>
+    <div class="letter">
+      <div class="from">✉️ 胡昊 · 回信</div>
+      <p>亲爱的，选择你，是我人生中最坚定的一件事。你问我为何，我沉默不语，苍白的语言和知识的贫瘠无法表达其万一，用命运做解。</p>
+      <p>和你讲话是如此自由，我第一次感到做真实的自己是被全然接纳的，不用表演，不必隐藏。你恰好出现在我需要的灵魂坐标，和你一起，我有足够的欲望和创造力。</p>
+      <p>我可以确定的是，我的基因选择了你，从多巴胺到荷尔蒙；我的灵感选择了你，从文字到表达；我的动物性选择了你，从本能到欲望；我的神性选择了你，你是我追求的真善美，是我的超越。</p>
+      <p>以上所有汇成我的坚定：<em>我爱你。</em></p>
+      <p>这份坚定不是终点，是我决心向你靠近，自我超越的起点。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ 遇见你之前 ════════════ -->
+<section>
+  <div class="section-title">第五章 · 遇见你之前</div>
+  <div class="poem">
+    <p>遇见你之前</p>
+    <p>我不会写喜欢</p>
+    <p>也不知道</p>
+    <p>也没人纠正</p>
+    <p>谁又在乎呢</p>
+    <p>这世界那么大</p>
+    <p>我也不在乎</p>
+    <div class="stanza-break"></div>
+    <p>遇见你的那天</p>
+    <p>也没有什么特别</p>
+    <p>普通的夜色</p>
+    <p>普通的风</p>
+    <p>一个发光的你</p>
+    <div class="stanza-break"></div>
+    <p>遇见你之后</p>
+    <p>不再克制</p>
+    <p>不想成熟</p>
+    <p>告诉我自己</p>
+    <p>这一次</p>
+    <p>我要把握</p>
+    <p>最想要的</p>
+    <div class="stanza-break"></div>
+    <p>遇见你之前</p>
+    <p>我不会写喜欢</p>
+    <p>幸好</p>
+    <p>遇见你</p>
+  </div>
+</section>
+
+<!-- ════════════ 双城 ════════════ -->
+<section>
+  <div class="section-title">第六章 · 双城记</div>
+  <div class="quote-card">
+    <p>最近的日子疲惫又充实。当心底的声音与你重合，站在我们共同的未来，仿佛浮出水面——身体的重力变得清晰可感，压力更直接地压向双腿，需要全身发力去对抗。</p>
+    <p>我比过去二十多年的任何一刻都更清醒地意识到：必须踩实地面，绝不能犯错。</p>
+    <p>我想做成这件事——为了我们俩更好的生活质量，为了减轻你对未来的焦虑，让你拥有更多的笑脸。</p>
+    <p><em>永远爱你，永远热泪盈眶。</em></p>
+    <div class="sig">—— 2026年，广州→上海</div>
+  </div>
+</section>
+
+<!-- ════════════ 音乐 ════════════ -->
+<section>
+  <div class="section-title">第七章 · 为你写的歌</div>
+  <div class="song-list" id="songList">
+    <div class="song-card" onclick="switchSong('出水芙蓉.mp3', this)">
+      <div class="play-icon">▶</div>
+      <div class="song-info">
+        <div class="song-name">出水芙蓉</div>
+        <div class="song-desc">第一次看见窗户里的你，清澈明朗，像出水的芙蓉</div>
+      </div>
+    </div>
+    <div class="song-card" onclick="switchSong('出水芙蓉2.mp3', this)">
+      <div class="play-icon">▶</div>
+      <div class="song-info">
+        <div class="song-name">出水芙蓉 II</div>
+        <div class="song-desc">你的美，值得再写一首</div>
+      </div>
+    </div>
+    <div class="song-card" onclick="switchSong('before_you_love_was_unwritten.mp3', this)">
+      <div class="play-icon">▶</div>
+      <div class="song-info">
+        <div class="song-name">遇见你之前</div>
+        <div class="song-desc">520 纪念曲 · 我不会写喜欢</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ 一周年 ════════════ -->
+<section class="finale">
+  <h2>一周年</h2>
+  <div class="big-date">2025.8.10 — 2026.8.10</div>
+  <p class="closing">
+    从山西佛寺的初见，到南京的落日；<br>
+    从你的第一封信，到我写下的每一句情话；<br>
+    从广州到上海，隔着千里，<br>
+    但每一次想起你，都是一次重逢。<br><br>
+    <em>我爱你，高嘉阳。</em><br>
+    一周年快乐。
+  </p>
+</section>
+
+<footer>
+  胡昊 ❤ 高嘉阳 · 2025.8.10 — 2026.8.10<br>
+  距离打不败浪漫
+</footer>
+
+<!-- ════════════ Music Player ════════════ -->
+<audio id="bgm" loop preload="auto">
+  <source src="出水芙蓉.mp3" type="audio/mpeg">
+</audio>
+<button class="music-btn playing" id="musicToggle" onclick="toggleMusic()" title="音乐开关">🎵</button>
 
 <script>
-    const audio = document.getElementById("audio-media");
+  const bgm = document.getElementById('bgm');
+  const musicBtn = document.getElementById('musicToggle');
+  let currentSong = '出水芙蓉.mp3';
+  let isPlaying = false;
 
-    function playAudio() {
-        audio.play();
+  // Auto-play attempt
+  document.addEventListener('click', function initPlay() {
+    if (!isPlaying) {
+      bgm.play().then(() => { isPlaying = true; musicBtn.classList.add('playing'); }).catch(() => {});
     }
+  }, { once: false });
 
-    function pauseAudio() {
-        audio.pause();
-    }
+  function toggleMusic() {
+    if (isPlaying) { bgm.pause(); isPlaying = false; musicBtn.classList.remove('playing'); musicBtn.textContent = '🔇'; }
+    else { bgm.play().then(() => { isPlaying = true; musicBtn.classList.add('playing'); musicBtn.textContent = '🎵'; }).catch(() => {}); }
+  }
 
-    function stopAudio() {
-        audio.pause();
-        audio.currentTime = 0;
-    }
+  function switchSong(src, el) {
+    currentSong = src;
+    bgm.src = src;
+    bgm.play().then(() => { isPlaying = true; musicBtn.classList.add('playing'); musicBtn.textContent = '🎵'; }).catch(() => {});
+    // Update icons
+    document.querySelectorAll('.song-card .play-icon').forEach(icon => icon.textContent = '▶');
+    el.querySelector('.play-icon').textContent = '♪';
+  }
+
+  // Day counter
+  const start = new Date('2025-08-04'); // First meeting day
+  const now = new Date();
+  const diffDays = Math.floor((now - start) / (1000 * 60 * 60 * 24));
+  document.getElementById('dayCount').textContent = diffDays;
+
+  // Reveal on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.quote-card, .letter, .poem, .song-card, .img-spot, .section-title').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(25px)';
+    el.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+    observer.observe(el);
+  });
 </script>
 </body>
 </html>
