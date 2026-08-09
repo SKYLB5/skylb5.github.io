@@ -53,46 +53,31 @@
 
   /* ── Hero ── */
   .hero {
-    min-height: 100vh;
+    min-height: 100vh; min-height: 100svh;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    text-align: center;
-    padding: 2rem;
-    position: relative;
+    text-align: center; padding: 2rem; position: relative;
     background: radial-gradient(ellipse at center, var(--card) 0%, var(--bg) 70%);
   }
   .hero h1 {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 400;
-    letter-spacing: 0.08em;
-    color: var(--accent);
-    margin-bottom: 1.2rem;
+    font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 400;
+    letter-spacing: 0.08em; color: var(--accent); margin-bottom: 1.2rem;
     animation: fadeUp 1.8s ease-out;
   }
   .hero .sub {
-    font-size: 1.1rem;
-    color: var(--muted);
-    letter-spacing: 0.2em;
+    font-size: 1.1rem; color: var(--muted); letter-spacing: 0.2em;
     animation: fadeUp 1.8s ease-out 0.3s both;
   }
   .hero .days {
-    margin-top: 2.5rem;
-    font-size: 0.9rem;
-    color: var(--muted);
-    letter-spacing: 0.15em;
-    animation: fadeUp 1.8s ease-out 0.6s both;
+    margin-top: 2.5rem; font-size: 0.9rem; color: var(--muted);
+    letter-spacing: 0.15em; animation: fadeUp 1.8s ease-out 0.6s both;
   }
   .hero .days span {
-    font-size: 2.2rem;
-    color: var(--accent);
-    font-weight: 300;
-    display: block;
-    letter-spacing: 0.05em;
+    font-size: 2.2rem; color: var(--accent); font-weight: 300;
+    display: block; letter-spacing: 0.05em;
   }
   .scroll-hint {
-    position: absolute; bottom: 2rem;
-    color: var(--muted); font-size: 0.8rem;
-    animation: bounce 2s infinite;
-    cursor: default;
+    position: absolute; bottom: 2rem; color: var(--muted); font-size: 0.8rem;
+    animation: bounce 2s infinite; cursor: default;
   }
   @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
@@ -113,30 +98,12 @@
   section { max-width: 720px; margin: 0 auto; padding: 5rem 2rem; }
   .section-title {
     text-align: center; font-size: 1.4rem; font-weight: 400;
-    color: var(--accent); letter-spacing: 0.15em;
-    margin-bottom: 3rem;
+    color: var(--accent); letter-spacing: 0.15em; margin-bottom: 3rem;
   }
   .section-title::after {
     content: ''; display: block; width: 40px; height: 1px;
     background: var(--line); margin: 1rem auto 0;
   }
-
-  /* ── Timeline ── */
-  .timeline { position: relative; padding-left: 2rem; }
-  .timeline::before {
-    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
-    width: 1px; background: var(--line);
-  }
-  .tl-item { position: relative; margin-bottom: 3rem; }
-  .tl-item::before {
-    content: ''; position: absolute; left: -2.35rem; top: 0.7rem;
-    width: 10px; height: 10px; border-radius: 50%;
-    background: var(--accent2); border: 2px solid var(--bg);
-  }
-  .tl-date { font-size: 0.85rem; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 0.3rem; }
-  .tl-title { font-size: 1.15rem; color: var(--accent); margin-bottom: 0.5rem; font-weight: 400; }
-  .tl-text { font-size: 0.95rem; color: var(--text); line-height: 2; }
-  .tl-text em { color: var(--rose); font-style: normal; }
 
   /* ── Quote card ── */
   .quote-card {
@@ -162,6 +129,72 @@
   .poem p { margin-bottom: 0.3rem; font-size: 1rem; }
   .poem .stanza-break { height: 1rem; }
 
+  /* ── Interlude (short passages) ── */
+  .interlude { text-align: center; padding: 3rem 1rem; }
+  .interlude p { font-size: 1.05rem; color: var(--muted); line-height: 2.4; letter-spacing: 0.06em; }
+  .interlude .meta { font-size: 0.78rem; color: var(--muted); margin-top: 1.2rem; letter-spacing: 0.1em; opacity: 0.7; }
+
+  /* ── PHOTO: inline ── */
+  .photo-inline {
+    max-width: 400px; margin: 3rem auto; text-align: center;
+  }
+  .photo-inline img {
+    width: 100%; border-radius: 4px;
+    box-shadow: var(--shadow); cursor: pointer;
+    transition: transform 0.3s;
+  }
+  .photo-inline img:hover { transform: scale(1.02); }
+  .photo-inline .caption {
+    font-size: 0.8rem; color: var(--muted); margin-top: 0.8rem;
+    letter-spacing: 0.08em;
+  }
+
+  /* ── PHOTO GALLERY ── */
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 0.8rem;
+  }
+  .gallery .gallery-item {
+    aspect-ratio: 4/3; overflow: hidden; border-radius: 3px;
+    cursor: pointer; position: relative;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s;
+  }
+  .gallery .gallery-item:hover { transform: scale(1.03); }
+  .gallery .gallery-item img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+
+  /* ── PHOTO LIGHTBOX ── */
+  .lightbox {
+    display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.92); z-index: 9999;
+    align-items: center; justify-content: center; flex-direction: column;
+  }
+  .lightbox.active { display: flex; }
+  .lightbox img { max-width: 92vw; max-height: 80vh; border-radius: 4px; }
+  .lightbox .lb-close {
+    position: absolute; top: 1.5rem; right: 1.5rem;
+    color: #fff; font-size: 2rem; cursor: pointer;
+    width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
+    background: rgba(255,255,255,0.1); border-radius: 50%; border: none;
+  }
+  .lightbox .lb-caption { color: #ccc; margin-top: 1rem; font-size: 0.9rem; letter-spacing: 0.06em; }
+
+  /* ── VIDEO ── */
+  .video-wrap {
+    max-width: 600px; margin: 2rem auto; text-align: center;
+  }
+  .video-wrap video {
+    width: 100%; border-radius: 4px; box-shadow: var(--shadow);
+    background: #000;
+  }
+  .video-wrap .caption {
+    font-size: 0.8rem; color: var(--muted); margin-top: 0.8rem;
+    letter-spacing: 0.08em;
+  }
+
   /* ── Music Gallery ── */
   .song-list { display: grid; gap: 1.2rem; }
   .song-card {
@@ -181,20 +214,39 @@
   .song-card .song-info .song-name { font-size: 1rem; color: var(--text); }
   .song-card .song-info .song-desc { font-size: 0.8rem; color: var(--muted); margin-top: 0.2rem; }
 
+  /* ── Memo easter egg ── */
+  .memo-wrap { text-align: center; }
+  .memo-toggle {
+    display: inline-block; background: none; border: 1px dashed var(--line);
+    color: var(--muted); font-family: inherit; font-size: 0.85rem;
+    padding: 0.6rem 1.8rem; border-radius: 20px; cursor: pointer;
+    letter-spacing: 0.1em; transition: all 0.3s;
+  }
+  .memo-toggle:hover { border-color: var(--accent2); color: var(--accent); }
+  .memo-content {
+    display: none; max-width: 420px; margin: 2rem auto 0; text-align: left;
+    background: var(--card); border: 1px solid var(--line);
+    padding: 1.8rem 2rem; border-radius: 4px; box-shadow: var(--shadow);
+  }
+  .memo-content.open { display: block; }
+  .memo-content .memo-item { font-size: 0.9rem; line-height: 2; padding: 0.4rem 0; border-bottom: 1px dotted var(--line); }
+  .memo-content .memo-item:last-child { border-bottom: none; }
+  .memo-content .memo-date { color: var(--muted); font-size: 0.75rem; margin-right: 0.5rem; }
+
   /* ── Finale ── */
   .finale {
-    min-height: 100vh; display: flex; flex-direction: column;
+    min-height: 100vh; min-height: 100svh;
+    display: flex; flex-direction: column;
     align-items: center; justify-content: center; text-align: center;
     padding: 2rem;
   }
   .finale h2 {
-    font-size: clamp(1.6rem, 4vw, 2.5rem);
-    font-weight: 400; color: var(--accent);
-    letter-spacing: 0.1em; margin-bottom: 1.5rem;
+    font-size: clamp(1.6rem, 4vw, 2.5rem); font-weight: 400;
+    color: var(--accent); letter-spacing: 0.1em; margin-bottom: 1.5rem;
     animation: fadeUp 1.5s ease-out;
   }
   .finale .big-date {
-    font-size: 3rem; color: var(--rose); font-weight: 300;
+    font-size: 2.8rem; color: var(--rose); font-weight: 300;
     letter-spacing: 0.08em; margin: 1.5rem 0;
     animation: fadeUp 1.5s ease-out 0.3s both;
   }
@@ -203,22 +255,20 @@
     max-width: 500px; animation: fadeUp 1.5s ease-out 0.6s both;
   }
 
-  /* ── Image placeholders ── */
-  .img-spot {
-    width: 100%; max-width: 400px; margin: 2rem auto;
-    aspect-ratio: 4/3; background: var(--card);
-    border: 1px dashed var(--line); border-radius: 4px;
-    display: flex; align-items: center; justify-content: center;
-    color: var(--muted); font-size: 0.8rem;
-  }
-
   /* ── Footer ── */
   footer { text-align: center; padding: 3rem 2rem; color: var(--muted); font-size: 0.8rem; letter-spacing: 0.1em; }
+
+  /* Scroll reveal */
+  .reveal { opacity: 0; transform: translateY(25px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* Divider ornament */
+  .ornament { text-align: center; color: var(--line); font-size: 0.6rem; letter-spacing: 0.5em; padding: 1rem 0; }
 </style>
 </head>
 <body>
 
-<!-- ════════════ HERO ════════════ -->
+<!-- ════════════════ HERO ════════════════ -->
 <section class="hero">
   <h1>遇见你之前<br>我不会写喜欢</h1>
   <p class="sub">胡昊 &amp; 高嘉阳 · 一周年</p>
@@ -229,21 +279,27 @@
   <div class="scroll-hint">↓ 向下翻阅我们的故事</div>
 </section>
 
-<!-- ════════════ 初见 ════════════ -->
+<!-- ════════════════ 第一章 · 初见 ════════════════ -->
 <section>
-  <div class="section-title">第一章 · 初见</div>
-  <div class="quote-card">
+  <div class="section-title reveal">第一章 · 初见</div>
+  <div class="quote-card reveal">
     <p>我现在还记得第一次见你的每个细节，你从舅舅的身侧出现，舅舅开心的搂着你和我讲："你看她也来了"。她是谁？我应该认识吗？为什么也喊舅舅，哪里跳出来的？</p>
     <p>我尴尬和你打招呼，你热情的回应了我，好像我们本来认识一样。灯光照在你脸上，<em>像主角登场</em>。我是一个只有一句台词的小角色，蜷缩在你的明媚下，用疲惫把我包裹了起来，小心翼翼的隐藏我的尴尬。</p>
     <p>早就不记得这间寺庙的名字，不是翻手机也记不得拍了这些漂亮的花花草草。只记得这个塔有点斜，这个铃铛和你。</p>
-    <div class="sig">—— 2025年8月，山西</div>
+    <p>手机里第一张你的照片，比后面我们特意拍的喜欢。</p>
+    <div class="sig">—— 2025年8月，山西大同</div>
+  </div>
+  <div class="photo-inline reveal">
+    <img src="1.jpg" alt="初见" onclick="openLightbox('1.jpg','古都客相逢 共沐旧时光')">
+    <div class="caption">古都客相逢 共沐旧时光</div>
   </div>
 </section>
 
-<!-- ════════════ 动心 ════════════ -->
+<!-- ════════════════ 第二章 · 动心 ════════════════ -->
 <section>
-  <div class="section-title">第二章 · 动心</div>
-  <div class="quote-card">
+  <div class="section-title reveal">第二章 · 动心</div>
+  <div class="quote-card reveal">
+    <p>不确定是哪一刻，放下了疲惫的包裹，有了想亲近你的感觉。是姐姐借给我的肩膀吗？是你扎针时流露出的疲倦吗？第一次看见了窗户里的你，没有高傲的红唇，清澈明朗，透着疲惫和动人的美，<em>是出水的芙蓉</em>。</p>
     <p>亲爱的，你刚刚问我真的有一见钟情吗？我一直在想。</p>
     <p>我的答案是：<em>是的，我对你确乎是一见钟情。</em>当我看见你的喜怒哀乐，看见你的疲惫憔悴，看见墙里的真实的你，就无法自拔的爱上你了。</p>
     <p>无数次回忆那天与你相处的每一个细节，企图确认动心的那一瞬间。佛国寺与你独处的欣喜，你的笑影迟迟无法散去。想开口留你在副驾导航的内心独白与那辆车走散的失落。壁画博物馆的北齐风流和你的衣袂。</p>
@@ -252,38 +308,56 @@
   </div>
 </section>
 
-<!-- ════════════ 南京 ════════════ -->
+<!-- ════════════════ 第三章 · 雁门关下 ════════════════ -->
 <section>
-  <div class="section-title">第三章 · 南京落日</div>
-  <div class="quote-card">
-    <p>26岁，在南京看到了最美的落日，见到了最想见的人儿。</p>
-    <p>她比记忆中的还要可爱，会偷偷藏在机场，期待我去发现，算盘落空后会奔向我呼唤我。</p>
-    <p>比我记忆中的还要美丽，眼睛像大海的漩涡，让我一刻都舍不得挪开，一刻都舍不得松开牵她的手。</p>
-    <p>和记忆中一样潇洒有范，灯光下，光栅内，微笑，摇曳，盘头，捻足，每一个动作都恰到好处，<em>是superstar，是我的缪斯。</em></p>
-    <div class="sig">—— 2025年10月24日</div>
+  <div class="section-title reveal">第三章 · 雁门关下</div>
+  <div class="quote-card reveal">
+    <p>风吹过你的发，雁门关回荡千年的英雄气也慑服于你的笑容。杯中黄酒倒映你的笑容，唇齿留香在我的心。</p>
+    <p>我们本该相爱。</p>
+    <p>旅途的最后一天，终于又坐在你的身侧，闻见你的味道，行在你的背后，亦步亦趋。三千年的磅礴也挡不住你的回眸一笑。</p>
+    <p>看你的眼睛，倾听你的故事，跟着你的脚步，用镜头留下我们的瞬间，用最纯粹的欣喜触碰，感受。</p>
+    <p>我们今日就要分别，天高海阔，江湖路远，重逢何有期。如兰亭群贤"夫人之相与…欣于所欲，暂得于己，快然自足"，当效陶子归去来兮，自问"胡不归？"但我真的有陶子的智慧与潇洒吗？</p>
+    <p>可以抱你一下吗？<br>……<br><em>抱你一辈子。</em></p>
+    <div class="sig">—— 2025年9月</div>
   </div>
 </section>
 
-<!-- ════════════ 她的信 ════════════ -->
+<!-- ════════════════ 第四章 · 南京落日 ════════════════ -->
 <section>
-  <div class="section-title">第四章 · 她的来信</div>
+  <div class="section-title reveal">第四章 · 南京落日</div>
+  <div class="quote-card reveal">
+    <p>26岁，在南京看到了最美的落日，见到了最想见的人儿。</p>
+    <p>她比记忆中的还要可爱，会偷偷藏在机场，期待我去发现，算盘落空后会奔向我呼唤我。比我记忆中的还要美丽，眼睛像大海的漩涡，让我一刻都舍不得挪开，一刻都舍不得松开牵她的手。</p>
+    <p>和记忆中一样潇洒有范，灯光下，光栅内，微笑，摇曳，盘头，捻足，每一个动作都恰到好处，<em>是superstar，是我的缪斯。</em></p>
+    <p>她也会生很凶的气，会用酒精麻痹自己，酒后她会撒娇，会呆呆的看着窗外，让我心碎，第一次如此手足无措。我好爱她，看她难过我会落泪，看她开心我会快乐。看她幸福的样子，幸福她的幸福。</p>
+    <p>七夕的钟声响起，收到在每一个晚安之后悄悄准备、让我落泪的信和爱的卡片。</p>
+    <p>26岁，在南京，最美的落日和最爱的你。</p>
+    <div class="sig">—— 2025年10月 · 南京</div>
+  </div>
+  <div class="photo-inline reveal">
+    <img src="2.jpg" alt="南京" onclick="openLightbox('2.jpg','你是我的风景')">
+    <div class="caption">你是我的风景</div>
+  </div>
+</section>
+
+<!-- ════════════════ 第五章 · 她的来信 ════════════════ -->
+<section>
+  <div class="section-title reveal">第五章 · 她的来信</div>
   <div class="letters">
-    <div class="letter">
-      <div class="from">📨 高嘉阳 · 2026年3月24日</div>
-      <p><em>我比我以为的，还要爱你。</em></p>
+    <div class="letter reveal">
+      <div class="from">📨 高嘉阳 · 2026年3月24日 凌晨4:01</div>
+      <p>Hi我的小鸡毛，不知道你睡的是否踏实，梦是否香甜。显然，是我，此时还清醒。想念，让我无法入睡。</p>
       <p>兜兜转转，今天是我们在一起的第226天，我们认识的第233天。7个月的时间好像并没有磨平我们的爱意，反而让我在深夜因为喷涌而来的思念哭到无法入睡。</p>
       <p>35岁的年纪，我才没有想过我会因为一个男孩子哭到失眠。35岁的年纪，我才不会承认因为思念一遍遍泪流满面。</p>
-      <p>这7个月走来，我担心过我们因为年龄问题无法彼此成全互为后盾；害怕过因为地域问题不能举案齐眉相敬如宾；也陷入过因为世俗观点无法携手向前同甘共苦的循环假设中自我折磨看不到尽头。</p>
-      <p>因为在爱情里，我恰恰是一个毫无安全感又害怕受伤害的小朋友。</p>
-      <p>你说这一次的相处，让你想明白一件事，就算我没有给你承诺，你也要做选择，哪怕没有结果，你也要努力。</p>
-      <p>而我，好像直到昨天晚上帮你做了选择之后才恍神，原来很多答案其实早就有了，是我一直没有发现。</p>
+      <p>这233天时间，是你勇敢又主动地让我直面自己内心；也是你比我更懂我自己，在我跟自己闹脾气的时候一点点撬开外面的刺，一点点安慰着那颗自以为保护的很好，实际早就被自己弄伤的心；还是你，让我好像开始没那么害怕婚姻，开始向往两个人的生活，开始无法适应没有你的日子…</p>
+      <p><em>我比我以为的，还要爱你。</em></p>
       <p><em>我比我察觉到的，还要爱你。</em></p>
-      <p>是的，因为此刻我无比笃定，我比我以为的，还要爱你。</p>
       <div class="sig">—— 爱你的小白</div>
     </div>
-    <div class="letter">
+    <div class="letter reveal">
       <div class="from">✉️ 胡昊 · 回信</div>
       <p>亲爱的，选择你，是我人生中最坚定的一件事。你问我为何，我沉默不语，苍白的语言和知识的贫瘠无法表达其万一，用命运做解。</p>
+      <p>心理学讲薄片撷取效应：人类大脑能在极短时间内通过碎片信息形成对他人性格、可信度的准确判断。短暂的相处已经激活我迟钝的大脑，你的思想，你的真诚，你的疲惫，你的笑容，你的倾听，你的情绪，一切的一切与我内心深处那个模糊的、我不曾察觉过的身影逐渐重合，具像了我对爱情的抽象想象。</p>
       <p>和你讲话是如此自由，我第一次感到做真实的自己是被全然接纳的，不用表演，不必隐藏。你恰好出现在我需要的灵魂坐标，和你一起，我有足够的欲望和创造力。</p>
       <p>我可以确定的是，我的基因选择了你，从多巴胺到荷尔蒙；我的灵感选择了你，从文字到表达；我的动物性选择了你，从本能到欲望；我的神性选择了你，你是我追求的真善美，是我的超越。</p>
       <p>以上所有汇成我的坚定：<em>我爱你。</em></p>
@@ -292,31 +366,186 @@
   </div>
 </section>
 
-<!-- ════════════ 遇见你之前 ════════════ -->
+<!-- ════════════════ 中秋夜雨 ════════════════ -->
 <section>
-  <div class="section-title">第五章 · 遇见你之前</div>
-  <div class="poem">
+  <div class="section-title reveal">中秋夜雨</div>
+  <div class="poem reveal">
+    <p>再一次坐在教室</p>
+    <p>坐在你身边</p>
+    <p>食堂吃饭</p>
+    <p>小径漫步</p>
+    <p>少年一样</p>
+    <p>买一杯</p>
+    <p>爱的胡萝卜汁</p>
+    <div class="stanza-break"></div>
+    <p>窥你的眉</p>
+    <p>描你的脸</p>
+    <p>课桌下牵你的手</p>
+    <p>墙角的吻</p>
+    <p>电子纸条</p>
+    <p>昨夜你的温柔</p>
+    <div class="stanza-break"></div>
+    <p>回忆从前</p>
+    <p>想着未来</p>
+    <p>写给你的每一句情话</p>
+    <div class="stanza-break"></div>
+    <p>和月亮一道</p>
+    <p>浮起</p>
+    <p>淡淡秋心</p>
+    <p>是离别吗</p>
+    <div class="stanza-break"></div>
+    <p>时光太短</p>
+    <p>相聚总是不够</p>
+    <p>时光很久</p>
+    <p>我们约好</p>
+    <p>天长地久</p>
+    <div class="stanza-break"></div>
+    <p>有一天</p>
+    <p>我会驾着七彩祥云</p>
+    <p>为你披上万丈霞光</p>
+    <p>生生世世</p>
+    <div class="sig" style="text-align:center;margin-top:2rem;">—— 乙巳年中秋 · 2025年9月6日</div>
+  </div>
+</section>
+
+<!-- ════════════════ 失眠夜 ════════════════ -->
+<section>
+  <div class="section-title reveal">失眠夜</div>
+  <div class="quote-card reveal">
+    <p>第二天了，还是睡不着。离了你，就像今晚云遮了月，从点点滴滴听到叶叶声声，还是无法睡去。</p>
+    <p>相爱以来，只觉光阴寸短，看你不够，听你不够，想你不够，睡眠也不够。不曾想竟连日辗转难眠。这种失眠不是梦里听到你的呼唤骤然醒来；不是在你身侧默默流泪到天明；不是感应于你，百转千回。</p>
+    <p>是无法入睡，好像少了什么——像挠不到的背。是在身边的拥抱，半夜醒来的吻，梦中也要贴贴；是在电话那头的娇嗔，夜半时分，努力去听你的呼吸。</p>
+    <p>我好想你，日出日落，黄昏三更。</p>
+    <p>困了，看见你的消息，知道你也睡不着，知道你现在睡去了。我也该睡了，晚安。</p>
+    <p>原来还是我们的感应。</p>
+    <div class="sig">—— 乙巳年中秋 夜雨随笔 · 2025年10月7日</div>
+  </div>
+</section>
+
+<!-- ════════════════ 喜欢到爱 ════════════════ -->
+<section>
+  <div class="section-title reveal">喜欢到爱</div>
+  <div class="quote-card reveal">
+    <p>喜欢到爱要走多远呢？魂牵梦绕算不算爱呢？是早起发现被你拉黑之后痛彻心扉吗？是第一次争吵之后的魂不附体吗？</p>
+    <p>我很难过，因为你不开心，我尝试解决但搞砸了。我不懂感情，不懂女人，不懂什么时候该讲什么话。我也不是傻子，也会讨别人开心，但总让你落泪，我的心都碎了。</p>
+    <p>我太笨拙，不擅长情绪提供，在你需要倾听的时候打扰你，我很抱歉。我没有站在道德里，我只想站在你背后。如果我没有做到，原谅我，我会做到的，一辈子。我要倾听你的喜怒哀乐，和你一起消化所有情绪，这是我给你的承诺。</p>
+    <p>你问我是什么时候爱上你，我想了很多个瞬间。</p>
+    <p>8月11号那天早上，痛哭流涕，一遍又一遍给你写信。后来你反复给我道歉，宿醉的周一，也要时时找我，怕我不开心。也是那天第一次说爱你。</p>
+    <p>是在西安，我反复求导，明悟我的心。那天晚上痛的刻骨铭心。</p>
+    <p>是在南京，我们的七夕，我们的热情。</p>
+    <p>是上海，你哭的上气不接下气，我心都碎了。</p>
+    <p>是向我的爷爷奶奶介绍你，踯躅已久，下定决心告诉我的父母长辈。</p>
+    <p>太多太多，我不确定是哪一个瞬间。但我确定，<em>日复一日，爱在生长。</em></p>
+    <p>我爱你，我愿意改变。我要做到我的承诺，不要剥夺我的权利。</p>
+    <div class="sig">—— 2025年11月2日</div>
+  </div>
+</section>
+
+<!-- ════════════════ 致Jasmine · 100日 ════════════════ -->
+<section>
+  <div class="section-title reveal">致Jasmine · 第一百个落日</div>
+  <div class="poem reveal">
+    <p>我的Jasmine，</p>
+    <p>100次落日，100个爱你的夜。</p>
+    <div class="stanza-break"></div>
+    <p>你是</p>
+    <p>第一朵茉莉</p>
+    <p>绽放在我的撒哈拉</p>
+    <div class="stanza-break"></div>
+    <p>这一次</p>
+    <p>比小王子幸运</p>
+    <p>找到了</p>
+    <p>第一朵</p>
+    <p>玫瑰</p>
+    <p>绽放在我的星空</p>
+    <div class="sig" style="text-align:center;margin-top:2rem;">—— 2025年11月13日</div>
+  </div>
+  <div class="interlude reveal">
+    <p>从别后，忆相逢，几回魂梦与君同。</p>
+    <div class="meta">—— 晏几道 · 2025年11月8日</div>
+  </div>
+</section>
+
+<!-- ════════════════ 我们的瞬间 ════════════════ -->
+<section>
+  <div class="section-title reveal">我们的瞬间</div>
+  <div class="gallery reveal" id="gallery">
+    <div class="gallery-item"><img src="1.jpg" alt="初见" onclick="openLightbox('1.jpg','古都客相逢 共沐旧时光')"></div>
+    <div class="gallery-item"><img src="2.jpg" alt="南京" onclick="openLightbox('2.jpg','你是我的风景')"></div>
+    <div class="gallery-item" id="photo3" style="display:none"><img src="photo_3.jpg" alt="" onclick="openLightbox('photo_3.jpg','')"></div>
+    <div class="gallery-item" id="photo4" style="display:none"><img src="photo_4.jpg" alt="" onclick="openLightbox('photo_4.jpg','')"></div>
+    <div class="gallery-item" id="photo5" style="display:none"><img src="photo_5.jpg" alt="" onclick="openLightbox('photo_5.jpg','')"></div>
+    <div class="gallery-item" id="photo6" style="display:none"><img src="photo_6.jpg" alt="" onclick="openLightbox('photo_6.jpg','')"></div>
+    <div class="gallery-item" id="photo7" style="display:none"><img src="photo_7.jpg" alt="" onclick="openLightbox('photo_7.jpg','')"></div>
+    <div class="gallery-item" id="photo8" style="display:none"><img src="photo_8.jpg" alt="" onclick="openLightbox('photo_8.jpg','')"></div>
+  </div>
+  <p style="text-align:center;font-size:0.78rem;color:var(--muted);margin-top:1.5rem;letter-spacing:0.06em;">📷 把更多照片放入文件夹，命名为 photo_3.jpg、photo_4.jpg……即可出现</p>
+</section>
+
+<!-- ════════════════ 第六章 · 遇见你之前 ════════════════ -->
+<section>
+  <div class="section-title reveal">第六章 · 遇见你之前</div>
+  <div class="poem reveal">
     <p>遇见你之前</p>
     <p>我不会写喜欢</p>
-    <p>也不知道</p>
+    <p>我不知道</p>
     <p>也没人纠正</p>
     <p>谁又在乎呢</p>
     <p>这世界那么大</p>
     <p>我也不在乎</p>
     <div class="stanza-break"></div>
+    <p>遇见你之前</p>
+    <p>我不会写喜欢</p>
+    <p>简单的欲望</p>
+    <p>简单的开心</p>
+    <p>简单的孤独着</p>
+    <p>看着别人的幸福</p>
+    <p>远远的祝福</p>
+    <div class="stanza-break"></div>
+    <p>遇见你之前</p>
+    <p>我不会写喜欢</p>
+    <p>从小得不到</p>
+    <p>最想要那个</p>
+    <p>长大</p>
+    <p>也就远远看着</p>
+    <p>别人放光芒</p>
+    <p>克制我的欲望</p>
+    <p>告诉我自己</p>
+    <p>这是成熟</p>
+    <div class="stanza-break"></div>
+    <p>遇见你之前</p>
+    <p>我不会写喜欢</p>
+    <p>也不懂爱</p>
+    <p>不懂为什么</p>
+    <p>一个人会</p>
+    <p>傻傻</p>
+    <p>看另一个人</p>
+    <div class="stanza-break"></div>
     <p>遇见你的那天</p>
     <p>也没有什么特别</p>
-    <p>普通的夜色</p>
     <p>普通的风</p>
-    <p>一个发光的你</p>
+    <p>普通的夜色</p>
+    <p>一个发光的你罢了</p>
+    <div class="stanza-break"></div>
+    <p>那天</p>
+    <p>你说我</p>
+    <p>写错你的嘉</p>
+    <p>写错喜欢你</p>
+    <p>这么多年</p>
+    <p>第一次知道</p>
+    <p>第一次有人告诉我</p>
     <div class="stanza-break"></div>
     <p>遇见你之后</p>
     <p>不再克制</p>
-    <p>不想成熟</p>
+    <p>不用成熟</p>
     <p>告诉我自己</p>
     <p>这一次</p>
     <p>我要把握</p>
     <p>最想要的</p>
+    <div class="stanza-break"></div>
+    <p>爱你走过的路</p>
+    <p>走过那些时光</p>
+    <p>走进我的岁月</p>
     <div class="stanza-break"></div>
     <p>遇见你之前</p>
     <p>我不会写喜欢</p>
@@ -325,22 +554,86 @@
   </div>
 </section>
 
-<!-- ════════════ 双城 ════════════ -->
+<!-- ════════════════ 泽当错 · 命运的前奏 ════════════════ -->
 <section>
-  <div class="section-title">第六章 · 双城记</div>
-  <div class="quote-card">
-    <p>最近的日子疲惫又充实。当心底的声音与你重合，站在我们共同的未来，仿佛浮出水面——身体的重力变得清晰可感，压力更直接地压向双腿，需要全身发力去对抗。</p>
-    <p>我比过去二十多年的任何一刻都更清醒地意识到：必须踩实地面，绝不能犯错。</p>
+  <div class="section-title reveal">泽当错 · 命运的前奏</div>
+  <div class="quote-card reveal">
+    <p>我应不应该相信命运呢？</p>
+    <p>雷古神山，我爬到泽当错，到了这里才知道泽当两个字是爱情的意思。这里云雾昭昭，像仙气一般，但是我看不清这个湖的真面目。给你打完电话之后，云雾慢慢散去。但没有阳光的照射，没有五颜六色的湖面，也不过是很普通的冰晶。</p>
+    <p>若我信命信缘，它是要告诉我，迷雾散尽会看到湖面吗？半散不散的时候湖面才最美。是你的到来？是我们的到来？在马年第一个到达泽当错的人，是我们的到来，让湖面的雾被驱散了？还是和你结束通话之后，雾才被驱散？</p>
+    <p>要我说，那也不过是最简单的，正常的天气现象。哎，它并没有攀登时一路攀登时，沿途的风景美丽。还是说，它会在有阳光的日子里，才会显出它最美的样子？</p>
+    <div class="sig">—— 2025年3月8日，雷古神山</div>
+  </div>
+  <p style="text-align:center;font-size:0.8rem;color:var(--muted);margin-top:1rem;letter-spacing:0.06em;">* 这是遇见你之前的五个月。那时我还不知道，命运已经在准备了。</p>
+</section>
+
+<!-- ════════════════ 第七章 · 双城记 ════════════════ -->
+<section>
+  <div class="section-title reveal">第七章 · 双城记</div>
+  <div class="quote-card reveal">
+    <p>当心底的声音与你重合，站在我们共同的未来，仿佛浮出水面——身体的重力变得清晰可感，压力更直接地压向双腿，需要全身发力去对抗。</p>
+    <p>我比过去二十多年的任何一刻都更清醒地意识到：必须踩实地面，绝不能犯错。于是，我进一步迸发工作的热情，不再因"实名"而羞耻；我更加清晰自己的责任——这是我的个人品牌力，我要让所有人重新认识我。</p>
     <p>我想做成这件事——为了我们俩更好的生活质量，为了减轻你对未来的焦虑，让你拥有更多的笑脸。</p>
     <p><em>永远爱你，永远热泪盈眶。</em></p>
-    <div class="sig">—— 2026年，广州→上海</div>
+    <div class="sig">—— 2026年 · 广州 → 上海</div>
   </div>
 </section>
 
-<!-- ════════════ 音乐 ════════════ -->
+<!-- ════════════════ 平安夜 ════════════════ -->
 <section>
-  <div class="section-title">第七章 · 为你写的歌</div>
-  <div class="song-list" id="songList">
+  <div class="section-title reveal">平安夜</div>
+  <div class="quote-card reveal">
+    <p>平安夜，想送捧花给亲爱的你，再配一首小诗。想写撒哈拉的每一粒沙子，夜空每一颗星星，都是我又想你一次；想写路边的草，草里的刺猬，每一束盛开的晚风都是我对你的守护；想写天空落下的雨，倒映你的美丽，缠绕我的思念，绵密潮湿。</p>
+    <p>翻来覆去一句配你的诗都没有写下，覆去翻来都是对你的思念。我好想你，就像怦然心动开始的那刹那。</p>
+    <p>最近很忙，很累，有很多事还没有做，有很多话想和你讲，得不到一刻放松，只有这些琐碎的意象见缝插针。</p>
+    <p>我好想你啊宝贝，我要宝贝平平安安，开开心心。</p>
+    <div class="sig">—— 2025年12月24日</div>
+  </div>
+</section>
+
+<!-- ════════════════ 生气与心疼 ════════════════ -->
+<section>
+  <div class="section-title reveal">生气与心疼</div>
+  <div class="quote-card reveal">
+    <p>我生气，你怎么可以一个晚上不找我，是在学习吗，我很心酸，你知道我不会打扰你的。不是工作，你从来不会因为工作不理我。我也在工作学习，有效率有质量的，但我一直在想你。睡着了吗？你知道我会很担心的。我很难过，你疲惫到忘记我。</p>
+    <p>我在生气，你又在依赖酒精。你知道它会伤害你的身体，解决不了问题，也可能让你的情绪更加糟糕。</p>
+    <p>我很生气，你怎么可以偷偷难过，讲不想让我担心，你明明知道我一直在牵挂你。</p>
+    <p>我生气，叔叔阿姨在离开之后和你沟通，在逃避什么？与你可能的正面冲突？他们有用什么方式爱你？遥遥万里，他们会像我感应到你的难过吗？感应到几分？</p>
+    <p>我的肚子又在绞痛，看到你的信息就开始了。我生我自己的气，我给你带来痛苦了吗？让你不相信自己。</p>
+    <div class="sig">—— 2025年10月30日</div>
+  </div>
+</section>
+
+<!-- ════════════════ 情人节情书 ════════════════ -->
+<section>
+  <div class="section-title reveal">情人节情书</div>
+  <div class="quote-card reveal">
+    <p>这一次，不再是观众。我也是爱情故事里的主角。一切憧憬都为你而来。</p>
+    <p>我好爱你啊亲爱的，特别特别爱你。在星星眨眼的时候，在漆黑的夜里，我听见黄河水流过的波涛，听见风吹过的叶叶声声，雨滴落在窗户的点点滴滴，还有你的呼吸，你的梦呓，你转身的瞬间。</p>
+    <p>我该如何完成这篇情书呢，在星星眨眼的时候，在这样一个宁静的夜，没有工作，没有噪音和漫长的思绪。回到母亲的胚胎，在最原始，最孤独的状态，倾听我的心，每次跳动都是你的回音。</p>
+    <p>你是我的内心的本真。每时每刻都是你，远处的群山，脚下的黄河，天上的月亮，屏幕中的游戏，喧闹的集市，还有夜晚的梦。无论在哪里，无论去向何方，都想你在我身边。</p>
+    <p>我爱你。我对情人节并不感冒，没有鹊桥相会的古老浪漫，没有520的朗朗上口，更没有我们相遇、我们相爱的那天，刻骨铭心。但有了你，<em>每天都是情人节。</em></p>
+    <p>如果浪漫终将不可避免的走向庸俗，<em>让我们一起，庸俗到老。</em></p>
+    <div class="sig">—— 2026年2月13日</div>
+  </div>
+</section>
+
+<!-- ════════════════ 我们的视频 ════════════════ -->
+<section>
+  <div class="section-title reveal">属于我们的画面</div>
+  <div class="video-wrap reveal">
+    <video controls preload="metadata" poster="1.jpg">
+      <source src="video1.mp4" type="video/mp4">
+      您的浏览器不支持视频播放。
+    </video>
+    <div class="caption">每一个瞬间，都是我想念你的理由</div>
+  </div>
+</section>
+
+<!-- ════════════════ 第八章 · 为你写的歌 ════════════════ -->
+<section>
+  <div class="section-title reveal">第八章 · 为你写的歌</div>
+  <div class="song-list reveal" id="songList">
     <div class="song-card" onclick="switchSong('出水芙蓉.mp3', this)">
       <div class="play-icon">▶</div>
       <div class="song-info">
@@ -365,17 +658,35 @@
   </div>
 </section>
 
-<!-- ════════════ 一周年 ════════════ -->
+<!-- ════════════════ 老婆备忘录 ════════════════ -->
+<section>
+  <div class="section-title reveal">老婆备忘录</div>
+  <div class="memo-wrap reveal">
+    <p style="font-size:0.9rem;color:var(--muted);margin-bottom:1.5rem;letter-spacing:0.06em;">📋 关于你的一切，都在我的备忘录里</p>
+    <button class="memo-toggle" onclick="toggleMemo()" id="memoBtn">展开看看 →</button>
+    <div class="memo-content" id="memoContent">
+      <div class="memo-item"><span class="memo-date">8月26日</span>没有吹头发，说不会疼。20分钟后头疼去吹头发</div>
+      <div class="memo-item"><span class="memo-date">9月3日</span>下午喝冰奶茶，胃不舒服</div>
+      <div class="memo-item"><span class="memo-date">9月4日</span>喝完酒喝了红枣生姜茶，第二天早上没有头疼；中午回来头疼，咳嗽加重</div>
+      <div class="memo-item"><span class="memo-date">9月6日</span>老婆眼皮痒</div>
+      <div class="memo-item"><span class="memo-date">9月8日</span>老婆和阿姨生气，喝酒，趁我不注意多喝一瓶啤酒和一杯金酒。第二天早上头疼头晕，上班晚到还被总助盯着看，第二天还断片，一起处理的小小问题都忘了。生气💢</div>
+      <p style="text-align:center;font-size:0.78rem;color:var(--muted);margin-top:1.2rem;">—— 照顾好自己，亲爱的。我在盯着你呢。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ 一周年 ════════════════ -->
 <section class="finale">
   <h2>一周年</h2>
-  <div class="big-date">2025.8.10 — 2026.8.10</div>
-  <p class="closing">
+  <div class="big-date reveal">2025.8.10<br>—<br>2026.8.10</div>
+  <p class="closing reveal">
     从山西佛寺的初见，到南京的落日；<br>
     从你的第一封信，到我写下的每一句情话；<br>
     从广州到上海，隔着千里，<br>
     但每一次想起你，都是一次重逢。<br><br>
     <em>我爱你，高嘉阳。</em><br>
-    一周年快乐。
+    一周年快乐。<br>
+    <span style="font-size:0.85rem;display:block;margin-top:1rem;">如果浪漫终将不可避免的走向庸俗，<br>让我们一起，庸俗到老。</span>
   </p>
 </section>
 
@@ -384,19 +695,25 @@
   距离打不败浪漫
 </footer>
 
-<!-- ════════════ Music Player ════════════ -->
+<!-- ════════════════ Lightbox ════════════════ -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lb-close" onclick="closeLightbox()">✕</button>
+  <img src="" alt="" id="lb-img">
+  <div class="lb-caption" id="lb-caption"></div>
+</div>
+
+<!-- ════════════════ Music Player ════════════════ -->
 <audio id="bgm" loop preload="auto">
   <source src="出水芙蓉.mp3" type="audio/mpeg">
 </audio>
 <button class="music-btn playing" id="musicToggle" onclick="toggleMusic()" title="音乐开关">🎵</button>
 
 <script>
+  /* ── Music ── */
   const bgm = document.getElementById('bgm');
   const musicBtn = document.getElementById('musicToggle');
-  let currentSong = '出水芙蓉.mp3';
   let isPlaying = false;
 
-  // Auto-play attempt
   document.addEventListener('click', function initPlay() {
     if (!isPlaying) {
       bgm.play().then(() => { isPlaying = true; musicBtn.classList.add('playing'); }).catch(() => {});
@@ -409,36 +726,63 @@
   }
 
   function switchSong(src, el) {
-    currentSong = src;
     bgm.src = src;
     bgm.play().then(() => { isPlaying = true; musicBtn.classList.add('playing'); musicBtn.textContent = '🎵'; }).catch(() => {});
-    // Update icons
     document.querySelectorAll('.song-card .play-icon').forEach(icon => icon.textContent = '▶');
     el.querySelector('.play-icon').textContent = '♪';
   }
 
-  // Day counter
-  const start = new Date('2025-08-04'); // First meeting day
-  const now = new Date();
-  const diffDays = Math.floor((now - start) / (1000 * 60 * 60 * 24));
-  document.getElementById('dayCount').textContent = diffDays;
+  /* ── Day counter ── */
+  (function(){
+    const start = new Date('2025-08-04');
+    const diffDays = Math.floor((Date.now() - start) / 864e5);
+    document.getElementById('dayCount').textContent = diffDays;
+  })();
 
-  // Reveal on scroll
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-      }
-    });
-  }, { threshold: 0.15 });
+  /* ── Lightbox ── */
+  function openLightbox(src, caption) {
+    document.getElementById('lb-img').src = src;
+    document.getElementById('lb-caption').textContent = caption || '';
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeLightbox(); });
 
-  document.querySelectorAll('.quote-card, .letter, .poem, .song-card, .img-spot, .section-title').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(25px)';
-    el.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
-    observer.observe(el);
-  });
+  /* ── Memo toggle ── */
+  function toggleMemo() {
+    const content = document.getElementById('memoContent');
+    const btn = document.getElementById('memoBtn');
+    content.classList.toggle('open');
+    btn.textContent = content.classList.contains('open') ? '收起来 ↑' : '展开看看 →';
+  }
+
+  /* ── Scroll reveal ── */
+  (function(){
+    const obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('visible'); }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+  })();
+
+  /* ── Auto-show available photos ── */
+  (function(){
+    for (let i = 3; i <= 20; i++) {
+      const el = document.getElementById('photo' + i);
+      if (!el) continue;
+      const img = el.querySelector('img');
+      if (!img) continue;
+      const testImg = new Image();
+      testImg.onload = function() { el.style.display = ''; };
+      testImg.onerror = function() {};
+      testImg.src = img.src;
+    }
+  })();
 </script>
 </body>
 </html>
