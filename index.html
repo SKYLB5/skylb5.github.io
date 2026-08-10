@@ -872,35 +872,35 @@ footer { background:#050b13; color:var(--muted); border-top:1px solid var(--line
 <section>
   <div class="section-title reveal">第八章 · 为你写的歌</div>
   <div class="song-list reveal" id="songList">
-    <div class="song-card" onclick="switchSong('出水芙蓉.mp3', this)">
+    <div class="song-card" onclick="switchSong('出水芙蓉.mp3', this, event)" role="button" tabindex="0">
       <div class="play-icon">▶</div>
       <div class="song-info">
         <div class="song-name">出水芙蓉</div>
         <div class="song-desc">第一次看见窗户里的你，清澈明朗，像出水的芙蓉</div>
       </div>
     </div>
-    <div class="song-card" onclick="switchSong('出水芙蓉2.mp3', this)">
+    <div class="song-card" onclick="switchSong('出水芙蓉2.mp3', this, event)" role="button" tabindex="0">
       <div class="play-icon">▶</div>
       <div class="song-info">
         <div class="song-name">出水芙蓉 II</div>
         <div class="song-desc">你的美，值得再写一首</div>
       </div>
     </div>
-    <div class="song-card" onclick="switchSong('before_you_love_was_unwritten.mp3', this)">
+    <div class="song-card" onclick="switchSong('before_you_love_was_unwritten.mp3', this, event)" role="button" tabindex="0">
       <div class="play-icon">▶</div>
       <div class="song-info">
         <div class="song-name">遇见你之前</div>
         <div class="song-desc">520 纪念曲 · 我不会写喜欢</div>
       </div>
     </div>
-    <div class="song-card" onclick="switchSong('爱的胡萝卜.mp3', this)">
+    <div class="song-card" onclick="switchSong('爱的胡萝卜.mp3', this, event)" role="button" tabindex="0">
       <div class="play-icon">▶</div>
       <div class="song-info">
         <div class="song-name">爱的胡萝卜</div>
         <div class="song-desc">买一杯爱的胡萝卜汁 · 少年一样的我们</div>
       </div>
     </div>
-    <div class="song-card" onclick="switchSong('爱的胡萝卜2.mp3', this)">
+    <div class="song-card" onclick="switchSong('爱的胡萝卜2.mp3', this, event)" role="button" tabindex="0">
       <div class="play-icon">▶</div>
       <div class="song-info">
         <div class="song-name">爱的胡萝卜 II</div>
@@ -1105,7 +1105,7 @@ footer { background:#050b13; color:var(--muted); border-top:1px solid var(--line
 
 <!-- ════════════════ Music Player ════════════════ -->
 <audio id="bgm" loop preload="auto">
-  <source src="爱的胡萝卜2.mp3" type="audio/mpeg">
+  <source src="檐下思.mp3" type="audio/mpeg">
 </audio>
 <button class="music-btn playing" id="musicToggle" onclick="toggleMusic()" title="音乐开关">🎵</button>
 
@@ -1115,23 +1115,37 @@ footer { background:#050b13; color:var(--muted); border-top:1px solid var(--line
   const musicBtn = document.getElementById('musicToggle');
   let isPlaying = false;
 
-  document.addEventListener('click', function initPlay() {
-    if (!isPlaying) {
-      bgm.play().then(() => { isPlaying = true; musicBtn.classList.add('playing'); }).catch(() => {});
+  function playTrack(src) {
+    if (src) {
+      bgm.pause();
+      bgm.src = src;
+      bgm.load();
     }
-  }, { once: false });
+    bgm.volume = 0.78;
+    return bgm.play().then(() => {
+      isPlaying = true;
+      musicBtn.classList.add('playing');
+      musicBtn.textContent = '🎵';
+    }).catch(() => {
+      isPlaying = false;
+      musicBtn.classList.remove('playing');
+      musicBtn.textContent = '▶';
+    });
+  }
 
   function toggleMusic() {
     if (isPlaying) { bgm.pause(); isPlaying = false; musicBtn.classList.remove('playing'); musicBtn.textContent = '🔇'; }
-    else { bgm.play().then(() => { isPlaying = true; musicBtn.classList.add('playing'); musicBtn.textContent = '🎵'; }).catch(() => {}); }
+    else { playTrack(); }
   }
 
-  function switchSong(src, el) {
-    bgm.src = src;
-    bgm.play().then(() => { isPlaying = true; musicBtn.classList.add('playing'); musicBtn.textContent = '🎵'; }).catch(() => {});
+  function switchSong(src, el, event) {
+    if (event) event.stopPropagation();
+    playTrack(src);
     document.querySelectorAll('.song-card .play-icon').forEach(icon => icon.textContent = '▶');
     el.querySelector('.play-icon').textContent = '♪';
   }
+
+  document.getElementById('enterLetter').addEventListener('click', () => playTrack());
 
   /* ── Lightbox ── */
   function openLightbox(src, caption) {
