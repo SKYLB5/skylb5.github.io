@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>遇见你之前，我不会写喜欢 — 一周年</title>
+<title>我们的星图 — 一周年纪念</title>
 <style>
   :root {
     --bg: #fdf8f3;
@@ -15,6 +15,7 @@
     --line: #e8d5c4;
     --rose: #b8565a;
     --gold: #c49a4b;
+    --pine: #8B6914;
     --shadow: 0 2px 20px rgba(60, 30, 10, 0.06);
   }
   @media (prefers-color-scheme: dark) {
@@ -26,6 +27,7 @@
       --accent: #d4956b;
       --accent2: #c4734b;
       --line: #3a3028;
+      --pine: #B8953B;
       --shadow: 0 2px 20px rgba(0,0,0,0.3);
     }
   }
@@ -37,6 +39,7 @@
     --accent: #d4956b;
     --accent2: #c4734b;
     --line: #3a3028;
+    --pine: #B8953B;
     --shadow: 0 2px 20px rgba(0,0,0,0.3);
   }
 
@@ -49,6 +52,24 @@
     line-height: 2;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Floating pinecones ── */
+  .pinecone {
+    position: fixed; z-index: 0; pointer-events: none; user-select: none;
+    font-size: 1.4rem; opacity: 0.18;
+    animation: pineFloat 7s ease-in-out infinite;
+  }
+  .pinecone:nth-child(2) { animation-duration: 8.5s; animation-delay: -2s; }
+  .pinecone:nth-child(3) { animation-duration: 6.2s; animation-delay: -4s; }
+  .pinecone:nth-child(4) { animation-duration: 9s; animation-delay: -1s; }
+  .pinecone:nth-child(5) { animation-duration: 7.8s; animation-delay: -3s; }
+  .pinecone:nth-child(6) { animation-duration: 10s; animation-delay: -5s; }
+  @keyframes pineFloat {
+    0%,100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-18px) rotate(6deg); }
+    50% { transform: translateY(-8px) rotate(-3deg); }
+    75% { transform: translateY(-22px) rotate(4deg); }
   }
 
   /* ── Hero ── */
@@ -75,6 +96,10 @@
     font-size: 2.2rem; color: var(--accent); font-weight: 300;
     display: block; letter-spacing: 0.05em;
   }
+  .hero .midnight {
+    margin-top: 1.2rem; font-size: 0.78rem; color: var(--muted);
+    letter-spacing: 0.12em; animation: fadeUp 1.8s ease-out 0.8s both;
+  }
   .scroll-hint {
     position: absolute; bottom: 2rem; color: var(--muted); font-size: 0.8rem;
     animation: bounce 2s infinite; cursor: default;
@@ -95,7 +120,7 @@
   .music-btn.playing { border-color: var(--accent); }
 
   /* ── Sections ── */
-  section { max-width: 720px; margin: 0 auto; padding: 5rem 2rem; }
+  section { max-width: 720px; margin: 0 auto; padding: 5rem 2rem; position: relative; z-index: 1; }
   .section-title {
     text-align: center; font-size: 1.4rem; font-weight: 400;
     color: var(--accent); letter-spacing: 0.15em; margin-bottom: 3rem;
@@ -129,12 +154,18 @@
   .poem p { margin-bottom: 0.3rem; font-size: 1rem; }
   .poem .stanza-break { height: 1rem; }
 
-  /* ── Interlude (short passages) ── */
+  /* ── Confession poem (prologue) ── */
+  .confession { text-align: center; line-height: 2.5; padding: 2rem 0; }
+  .confession p { font-size: 1.05rem; margin-bottom: 0.25rem; }
+  .confession .stanza-break { height: 1.2rem; }
+  .confession em { color: var(--rose); font-style: normal; }
+
+  /* ── Interlude ── */
   .interlude { text-align: center; padding: 3rem 1rem; }
   .interlude p { font-size: 1.05rem; color: var(--muted); line-height: 2.4; letter-spacing: 0.06em; }
   .interlude .meta { font-size: 0.78rem; color: var(--muted); margin-top: 1.2rem; letter-spacing: 0.1em; opacity: 0.7; }
 
-  /* ── PHOTO: inline ── */
+  /* ── PHOTO inline ── */
   .photo-inline {
     max-width: 400px; margin: 3rem auto; text-align: center;
   }
@@ -196,25 +227,49 @@
   }
 
   /* ── Music Gallery ── */
-  .song-list { display: grid; gap: 1.2rem; }
+  .song-list { display: grid; gap: 1rem; }
   .song-card {
     background: var(--card); border: 1px solid var(--line);
-    padding: 1.5rem; border-radius: 4px;
-    display: flex; align-items: center; gap: 1.2rem;
+    padding: 1.3rem 1.4rem; border-radius: 4px;
+    display: flex; align-items: center; gap: 1rem;
     box-shadow: var(--shadow); cursor: pointer;
     transition: border-color 0.3s;
   }
   .song-card:hover { border-color: var(--accent2); }
   .song-card .play-icon {
-    width: 44px; height: 44px; border-radius: 50%;
+    width: 40px; height: 40px; border-radius: 50%;
     background: var(--accent); color: #fff;
     display: flex; align-items: center; justify-content: center;
-    font-size: 1.1rem; flex-shrink: 0;
+    font-size: 1rem; flex-shrink: 0;
   }
-  .song-card .song-info .song-name { font-size: 1rem; color: var(--text); }
-  .song-card .song-info .song-desc { font-size: 0.8rem; color: var(--muted); margin-top: 0.2rem; }
+  .song-card .song-info .song-name { font-size: 0.95rem; color: var(--text); }
+  .song-card .song-info .song-desc { font-size: 0.78rem; color: var(--muted); margin-top: 0.15rem; }
 
-  /* ── Memo easter egg ── */
+  /* ── Lyrics book ── */
+  .lyric-block {
+    background: var(--card); border: 1px solid var(--line);
+    padding: 2.5rem 2rem; border-radius: 4px;
+    box-shadow: var(--shadow); margin: 2rem 0;
+  }
+  .lyric-block .song-title {
+    text-align: center; font-size: 1.2rem; color: var(--accent);
+    letter-spacing: 0.12em; margin-bottom: 0.3rem;
+  }
+  .lyric-block .song-sub {
+    text-align: center; font-size: 0.78rem; color: var(--muted);
+    margin-bottom: 2rem; letter-spacing: 0.08em;
+  }
+  .lyric-block .lyric-section { margin-bottom: 1.4rem; }
+  .lyric-block .lyric-tag {
+    font-size: 0.72rem; color: var(--accent2); letter-spacing: 0.15em;
+    margin-bottom: 0.4rem; text-align: center;
+  }
+  .lyric-block .lyric-line {
+    text-align: center; font-size: 0.92rem; line-height: 2.1;
+    margin-bottom: 0.1rem;
+  }
+
+  /* ── Memo ── */
   .memo-wrap { text-align: center; }
   .memo-toggle {
     display: inline-block; background: none; border: 1px dashed var(--line);
@@ -255,28 +310,226 @@
     max-width: 500px; animation: fadeUp 1.5s ease-out 0.6s both;
   }
 
-  /* ── Footer ── */
   footer { text-align: center; padding: 3rem 2rem; color: var(--muted); font-size: 0.8rem; letter-spacing: 0.1em; }
 
   /* Scroll reveal */
   .reveal { opacity: 0; transform: translateY(25px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
-  /* Divider ornament */
-  .ornament { text-align: center; color: var(--line); font-size: 0.6rem; letter-spacing: 0.5em; padding: 1rem 0; }
+  /* Pinecone highlight in text */
+  em.pine { color: var(--pine); font-style: normal; }
+</style>
+<style>
+/* ── 2026 redesign: Night atlas ─────────────────────────────── */
+:root {
+  --bg: #07111f; --card: #0d1c2d; --text: #e8eef5; --muted: #91a4ba;
+  --accent: #b8d7ff; --accent2: #67c8ad; --rose: #eab4c3; --line: #29435b;
+  --pine: #d7b16e; --shadow: 0 18px 50px rgba(0,0,0,.26);
+}
+:root[data-theme="light"] { --bg:#e8f0f4; --card:#f8fbfc; --text:#14283c; --muted:#567084; --accent:#1b5f93; --accent2:#207a65; --rose:#a24862; --line:#c7d9e4; --pine:#9a6b2e; --shadow:0 18px 40px rgba(28,67,96,.12); }
+* { scrollbar-color: var(--accent2) var(--bg); }
+body { background:var(--bg); font-family: ui-rounded, "Microsoft YaHei", "PingFang SC", sans-serif; line-height:1.9; }
+body::before { content:""; position:fixed; inset:0; z-index:-2; pointer-events:none; background:radial-gradient(circle at 78% 5%,rgba(64,131,190,.25),transparent 25rem),radial-gradient(circle at 10% 42%,rgba(20,114,96,.18),transparent 30rem),linear-gradient(140deg,#081629,var(--bg) 60%); }
+body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.36; background-image:radial-gradient(circle at 20% 20%,#fff 0 1px,transparent 1.5px),radial-gradient(circle at 75% 12%,#b8d7ff 0 1px,transparent 1.5px),radial-gradient(circle at 55% 72%,#fff 0 .8px,transparent 1.3px); background-size:230px 190px,320px 250px,170px 160px; }
+.pinecone { font-size:0; opacity:1; width:20px; height:28px; background:linear-gradient(135deg,#d7b16e,#8d632b); border-radius:55% 55% 45% 45%; box-shadow:inset 4px 2px 0 rgba(255,255,255,.22),inset -4px -4px 0 rgba(0,0,0,.16); }
+.pinecone::after { content:""; position:absolute; inset:5px 4px; border-radius:50%; border-top:1px solid rgba(255,255,255,.8); border-bottom:1px solid rgba(15,34,49,.7); }
+.hero { min-height:100svh; padding:7rem 1.5rem 5rem; text-align:left; align-items:flex-start; justify-content:flex-end; background:transparent; max-width:1120px; margin:auto; }
+.hero::before { content:"一周年 · 星图"; position:absolute; top:7.4rem; left:clamp(1.5rem,7vw,7rem); color:var(--accent2); font-size:.78rem; letter-spacing:.22em; writing-mode:vertical-rl; }
+.hero h1 { max-width:820px; margin:0 0 1rem; font-size:clamp(3rem,9vw,7.4rem); line-height:1.04; color:var(--text); letter-spacing:-.07em; font-weight:800; text-wrap:balance; }
+.hero .sub { color:var(--accent); font-size:clamp(1rem,2vw,1.2rem); letter-spacing:.11em; }
+.hero .days { margin-top:2rem; display:flex; align-items:baseline; gap:.65rem; font-size:.9rem; color:var(--muted); letter-spacing:.06em; }
+.hero .days span { display:inline; color:var(--accent2); font-size:clamp(2.4rem,5vw,4.4rem); font-weight:750; }
+.hero .midnight { color:var(--muted); border-left:2px solid var(--accent2); padding-left:.8rem; }
+.scroll-hint { left:auto; right:clamp(1.5rem,7vw,7rem); bottom:2rem; letter-spacing:.12em; }
+.story-nav { position:fixed; z-index:1000; top:1rem; right:1rem; display:flex; gap:.4rem; align-items:center; background:color-mix(in srgb,var(--bg) 82%,transparent); border:1px solid var(--line); backdrop-filter:blur(16px); border-radius:999px; padding:.38rem; box-shadow:var(--shadow); }
+.story-nav button { border:0; color:var(--text); background:transparent; cursor:pointer; font:600 .78rem/1 ui-rounded,"Microsoft YaHei",sans-serif; padding:.62rem .8rem; border-radius:999px; }
+.story-nav button:hover,.story-nav button[aria-expanded="true"] { background:var(--accent2); color:#031914; }
+.chapter-drawer { position:fixed; z-index:999; top:4.8rem; right:1rem; width:min(330px,calc(100vw - 2rem)); max-height:70vh; overflow:auto; padding:.7rem; border:1px solid var(--line); border-radius:18px; background:color-mix(in srgb,var(--card) 94%,transparent); backdrop-filter:blur(20px); box-shadow:var(--shadow); transform:translateY(-10px); opacity:0; pointer-events:none; transition:.25s ease; }
+.chapter-drawer.open { opacity:1; transform:translateY(0); pointer-events:auto; }
+.chapter-drawer a { display:flex; align-items:center; gap:.7rem; text-decoration:none; color:var(--text); padding:.72rem .7rem; border-radius:11px; font-size:.86rem; }
+.chapter-drawer a::before { content:""; width:7px; height:7px; border:1px solid var(--accent2); border-radius:50%; flex:0 0 auto; }
+.chapter-drawer a:hover { background:rgba(103,200,173,.12); }
+section { max-width:1060px; padding:clamp(4rem,10vw,8rem) clamp(1.3rem,5vw,4rem); }
+section:not(.finale)::before { content:""; position:absolute; left:clamp(1.3rem,2.8vw,2.4rem); top:0; bottom:0; border-left:1px solid var(--line); }
+.section-title { text-align:left; font-size:clamp(1.65rem,3vw,2.5rem); font-weight:780; color:var(--text); letter-spacing:-.04em; margin-bottom:2.4rem; padding-left:2.1rem; position:relative; }
+.section-title::before { content:""; position:absolute; left:-.28rem; top:.72rem; width:.62rem; height:.62rem; border-radius:50%; background:var(--accent2); box-shadow:0 0 0 6px var(--bg),0 0 18px var(--accent2); }
+.section-title::after { display:none; }
+.quote-card,.letter,.lyric-block,.memo-content,.song-card { background:linear-gradient(145deg,color-mix(in srgb,var(--card) 94%,#14324d),var(--card)); border:1px solid var(--line); border-radius:18px; box-shadow:var(--shadow); }
+.quote-card { padding:clamp(1.5rem,4vw,3.2rem); }
+.quote-card p { font-size:1rem; line-height:2.05; }
+.quote-card .sig { color:var(--accent2); }
+.confession { text-align:left; max-width:760px; margin:0 auto; padding:1.6rem 0; }
+.confession p { font-size:clamp(1rem,2vw,1.18rem); line-height:2.05; }
+.confession em,.finale em { color:var(--accent2); }
+.interlude { text-align:left; border-left:2px solid var(--accent2); padding:1rem 1.5rem; margin-left:2.1rem; }
+.interlude p { color:var(--text); }
+.photo-inline { max-width:510px; margin:3rem auto; }
+.photo-inline img,.gallery .gallery-item,.video-wrap video { border-radius:16px; }
+.gallery { grid-template-columns:repeat(12,1fr); gap:1rem; }
+.gallery .gallery-item { grid-column:span 6; aspect-ratio:4/5; border:1px solid var(--line); }
+.gallery .gallery-item:first-child { grid-column:span 7; }
+.gallery .gallery-item:nth-child(2) { grid-column:span 5; margin-top:3rem; }
+.video-wrap { max-width:850px; }
+.song-list { gap:.8rem; }
+.song-card { padding:1rem 1.15rem; border-left:4px solid transparent; }
+.song-card:hover { border-left-color:var(--accent2); transform:translateX(5px); }
+.song-card .play-icon { width:42px; height:42px; background:var(--accent2); color:#041b18; font-weight:900; }
+.song-card .song-info .song-name { color:var(--text); font-weight:700; }
+.song-card .song-info .song-desc { color:var(--muted); }
+.lyric-block { padding:clamp(1.5rem,4vw,3.2rem); }
+.lyric-block .song-title { color:var(--accent); font-size:1.5rem; font-weight:750; }
+.lyric-block .song-sub,.lyric-block .lyric-tag { color:var(--accent2); }
+.lyric-block .lyric-line { color:var(--text); }
+.memo-toggle { border-color:var(--accent2); color:var(--accent2); border-radius:999px; padding:.78rem 1.4rem; }
+.memo-content { border-radius:16px; }
+.wandering-words { min-height:74vh; display:flex; flex-direction:column; justify-content:center; }
+.wandering-copy { max-width:840px; margin:0 auto; padding:clamp(1rem,4vw,3rem) 0; }
+.wandering-copy p { position:relative; max-width:37rem; margin:0 0 2.2rem; color:var(--text); font-size:clamp(1.1rem,2.2vw,1.55rem); line-height:1.8; letter-spacing:.035em; text-wrap:pretty; }
+.wandering-copy p::before { content:""; position:absolute; width:7px; height:7px; top:-.55rem; left:-1rem; border-radius:50%; background:var(--accent2); box-shadow:0 0 16px var(--accent2); }
+.wandering-copy p:nth-child(2) { margin-left:auto; transform:rotate(.7deg); }.wandering-copy p:nth-child(3) { margin-left:7%; transform:rotate(-.55deg); }.wandering-copy p:nth-child(4) { margin-left:auto; margin-right:8%; }.wandering-copy p:nth-child(5) { margin-left:15%; color:var(--accent); font-weight:700; }
+.carrot-poem { background:radial-gradient(circle at 80% 50%,rgba(223,137,72,.15),transparent 18rem); }.carrot-poem .poem { max-width:560px; margin:auto; padding:1.4rem 1rem; text-align:left; }.carrot-poem .poem p { position:relative; padding-left:1.15rem; }.carrot-poem .poem p::before { content:""; position:absolute; left:0; top:1.05em; width:.45rem; height:.45rem; border-radius:50% 50% 55% 55%; background:#e9894a; transform:rotate(45deg); }.carrot-poem .poem p:nth-child(7n+1) { color:var(--accent); }
+.line-pup { position:fixed; z-index:3; width:74px; height:58px; pointer-events:none; opacity:.82; filter:drop-shadow(0 8px 12px rgba(0,0,0,.18)); animation:pupDrift 7s ease-in-out infinite; }.line-pup .pup-head { position:absolute; left:17px; top:10px; width:42px; height:36px; border:2px solid var(--accent); border-radius:52% 52% 46% 46%; background:color-mix(in srgb,var(--bg) 78%,transparent); }.line-pup .pup-head::before { content:"•  •"; position:absolute; top:7px; left:9px; color:var(--accent); font:bold 16px/1 monospace; letter-spacing:2px; }.line-pup .pup-head::after { content:"⌣"; position:absolute; top:17px; left:14px; color:var(--accent2); font:bold 18px/1 sans-serif; }.line-pup .pup-ear { position:absolute; width:17px; height:25px; top:4px; border:2px solid var(--accent); background:var(--bg); }.line-pup .pup-ear.left { left:12px; border-radius:75% 18% 60% 35%; transform:rotate(-28deg); }.line-pup .pup-ear.right { right:10px; border-radius:18% 75% 35% 60%; transform:rotate(28deg); }.line-pup .pup-tail { position:absolute; left:3px; top:41px; width:25px; height:16px; border-top:2px solid var(--accent2); border-radius:50%; transform:rotate(-25deg); }.pup-a { right:2.2rem; top:30vh; }.pup-b { left:1.5rem; bottom:14vh; animation-delay:-2.5s; transform:scale(.78) rotate(-10deg); }.pup-c { right:7rem; bottom:7vh; animation-delay:-5s; transform:scale(.58) rotate(10deg); }.line-pup:hover { opacity:1; } @keyframes pupDrift { 0%,100% { margin-top:0; } 50% { margin-top:-13px; } }
+/* 公开贴纸本地化：小白与小金毛以 GIF 自身动作加上缓慢漂移陪伴页面。 */
+.line-pup { width:118px; height:118px; background:center / contain no-repeat; opacity:.96; filter:drop-shadow(0 10px 15px rgba(0,0,0,.24)); }.line-pup > span { display:none; }.pup-a { background-image:url('stickers/transparent-line-dog-dance.gif'); right:1rem; top:25vh; }.pup-b { background-image:url('stickers/transparent-line-dog-cuddle.gif'); left:1rem; bottom:12vh; }.pup-c { background-image:url('stickers/transparent-line-dog-heart.gif'); right:5.5rem; bottom:5vh; }.pup-d { background-image:url('stickers/transparent-line-dog-give-heart.gif'); left:5.5rem; top:16vh; animation-delay:-4.2s; transform:scale(.72) rotate(-8deg); }.pup-e { background-image:url('stickers/transparent-line-dog-two-hearts.gif'); right:14rem; top:62vh; animation-delay:-6.1s; transform:scale(.78) rotate(7deg); }
+.lyrics-archive { display:none !important; }
+.travel-reveal { position:relative; overflow:hidden; border:1px solid var(--line); border-radius:22px; background:linear-gradient(145deg,rgba(31,81,111,.58),rgba(7,17,31,.96)); box-shadow:var(--shadow); padding:clamp(1.1rem,3vw,2.2rem); }
+.travel-reveal::before { content:"2026"; position:absolute; right:-.1em; top:-.36em; color:rgba(184,215,255,.07); font-size:clamp(6rem,22vw,13rem); font-weight:900; letter-spacing:-.12em; pointer-events:none; }
+.travel-intro { position:relative; z-index:1; display:flex; flex-wrap:wrap; gap:1rem; align-items:flex-end; justify-content:space-between; margin-bottom:1.1rem; }
+.travel-kicker { margin:0; color:var(--accent2); font-size:.78rem; letter-spacing:.2em; }
+.travel-intro p:last-child { margin:.35rem 0 0; color:var(--muted); font-size:.86rem; }
+.travel-toggle { border:1px solid var(--accent2); border-radius:999px; padding:.74rem 1.05rem; background:var(--accent2); color:#031914; font:750 .83rem/1 ui-rounded,"Microsoft YaHei",sans-serif; cursor:pointer; transition:.2s; white-space:nowrap; }
+.travel-toggle:hover { transform:translateY(-2px); box-shadow:0 8px 22px rgba(103,200,173,.25); }
+.travel-grid { display:grid; grid-template-columns:repeat(12,1fr); gap:.65rem; position:relative; z-index:1; }
+.travel-shot { grid-column:span 4; aspect-ratio:1/1.15; overflow:hidden; padding:0; border:1px solid rgba(184,215,255,.23); border-radius:12px; background:var(--card); cursor:zoom-in; transition:transform .28s,filter .28s; }
+.travel-shot img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .45s ease; }
+.travel-shot:hover { transform:translateY(-4px); filter:brightness(1.1); }.travel-shot:hover img { transform:scale(1.05); }
+.travel-shot:nth-child(1) { grid-column:span 7; grid-row:span 2; aspect-ratio:auto; }.travel-shot:nth-child(2) { grid-column:span 5; }.travel-shot:nth-child(3) { grid-column:span 5; }
+.travel-shot.is-hidden { display:none; }.travel-reveal.is-open .travel-shot.is-hidden { display:block; }.travel-reveal.is-open .travel-shot { grid-column:span 4; grid-row:auto; aspect-ratio:1/1.15; }.travel-reveal.is-open .travel-shot:nth-child(1) { grid-column:span 8; grid-row:span 2; }.travel-reveal.is-open .travel-shot:nth-child(2),.travel-reveal.is-open .travel-shot:nth-child(3) { grid-column:span 4; }
+.travel-count { color:var(--accent); font-size:.76rem; margin:1rem 0 0; text-align:right; opacity:.8; }
+.finale { max-width:none; min-height:80vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; background:radial-gradient(circle at center,rgba(58,126,157,.22),transparent 50%); }
+.finale h2 { font-size:clamp(3rem,8vw,6rem); color:var(--text); letter-spacing:-.07em; }
+.finale .big-date { color:var(--accent2); }
+footer { background:#050b13; color:var(--muted); border-top:1px solid var(--line); padding:3rem 1.5rem 6rem; }
+.music-btn { right:1.15rem; bottom:1.15rem; width:54px; height:54px; background:var(--accent2); border:0; color:#031914; box-shadow:0 12px 30px rgba(0,0,0,.34); }
+.reveal { transform:translateY(24px); }
+@media (max-width:600px) { .hero { padding-top:7rem; } .hero h1 { letter-spacing:-.09em; } .hero::before { top:5.8rem; } .story-nav { right:.75rem; top:.75rem; } .chapter-drawer { right:.75rem; top:4.5rem; } section { padding-top:4.5rem; padding-bottom:4.5rem; } section:not(.finale)::before { left:1.25rem; } .section-title { padding-left:1.65rem; } .section-title::before { left:-.2rem; } .gallery .gallery-item,.gallery .gallery-item:first-child,.gallery .gallery-item:nth-child(2) { grid-column:span 12; margin-top:0; aspect-ratio:4/3; } .travel-shot,.travel-shot:nth-child(1),.travel-shot:nth-child(2),.travel-shot:nth-child(3),.travel-reveal.is-open .travel-shot,.travel-reveal.is-open .travel-shot:nth-child(1),.travel-reveal.is-open .travel-shot:nth-child(2),.travel-reveal.is-open .travel-shot:nth-child(3) { grid-column:span 6; grid-row:auto; aspect-ratio:1/1.18; } .travel-shot:nth-child(1),.travel-reveal.is-open .travel-shot:nth-child(1) { grid-column:span 12; aspect-ratio:4/3; } .wandering-copy p,.wandering-copy p:nth-child(n) { margin-left:0; margin-right:0; transform:none; font-size:1.08rem; } .line-pup { width:56px; transform:scale(.7)!important; opacity:.66; }.pup-a { right:.1rem; }.pup-b { left:-.4rem; }.pup-c,.pup-d,.pup-e { display:none; } .quote-card p { text-indent:1.4em; } }
+/* 手机端：优先可读性、单手操作与刘海屏安全区域。 */
+@media (max-width:680px) {
+  body { font-size:16px; }
+  .hero { min-height:100svh; padding:calc(env(safe-area-inset-top) + 5.5rem) 1.35rem calc(env(safe-area-inset-bottom) + 4.8rem); }
+  .hero::before { left:1.35rem; top:calc(env(safe-area-inset-top) + 4.55rem); font-size:.68rem; }
+  .hero h1 { max-width:11ch; font-size:clamp(2.75rem,14vw,4.2rem); line-height:1.06; }
+  .hero .sub { max-width:20rem; font-size:.94rem; line-height:1.7; }
+  .hero .days { margin-top:1.5rem; gap:.4rem; }.hero .days span { font-size:2.55rem; }
+  .hero .midnight { font-size:.75rem; max-width:18rem; }.scroll-hint { bottom:calc(env(safe-area-inset-bottom) + 1.15rem); right:1.35rem; }
+  .story-nav { top:calc(env(safe-area-inset-top) + .55rem); right:.65rem; min-height:46px; padding:.28rem; }
+  .story-nav button { min-height:40px; padding:.7rem .85rem; font-size:.8rem; }
+  .chapter-drawer { top:calc(env(safe-area-inset-top) + 4.25rem); right:.65rem; width:calc(100vw - 1.3rem); max-height:calc(100svh - env(safe-area-inset-top) - 5.25rem); border-radius:16px; }
+  .chapter-drawer a { min-height:47px; font-size:.94rem; padding:.8rem .75rem; }
+  section { padding:4.2rem 1.2rem; } section:not(.finale)::before { left:1.2rem; }
+  .section-title { font-size:1.65rem; margin-bottom:1.8rem; padding-left:1.55rem; }.section-title::before { top:.62rem; }
+  .quote-card,.letter,.lyric-block { padding:1.35rem 1.15rem; border-radius:15px; }.quote-card p,.letter p { line-height:1.92; }
+  .letters { gap:1rem; }.photo-inline { margin:2rem auto; }.photo-inline img { border-radius:13px; }
+  .travel-reveal { margin-left:.25rem; padding:1rem; border-radius:17px; }.travel-intro { align-items:flex-start; }.travel-intro > div { max-width:100%; }.travel-toggle { min-height:44px; width:100%; }.travel-grid { gap:.45rem; }
+  .travel-reveal.is-open .travel-shot { grid-column:span 6; aspect-ratio:1/1.16; }.travel-reveal.is-open .travel-shot:nth-child(1) { grid-column:span 12; grid-row:auto; aspect-ratio:4/3; }
+  .carrot-poem .poem { padding:.45rem 0; }.carrot-poem .poem p { font-size:1.02rem; }
+  .finale { min-height:72svh; padding:calc(env(safe-area-inset-top) + 2.5rem) 1.4rem calc(env(safe-area-inset-bottom) + 3.5rem); }.finale h2 { font-size:3.3rem; }.finale .big-date { font-size:2.1rem; }.finale .closing { font-size:1.18rem; }
+  .music-btn { right:max(1rem, env(safe-area-inset-right)); bottom:calc(env(safe-area-inset-bottom) + 1rem); width:56px; height:56px; }
+  footer { padding:2rem 1.2rem calc(env(safe-area-inset-bottom) + 5.5rem); font-size:.72rem; line-height:1.7; }
+}
+/* ── 私人情书版 ───────────────────────────────────────────── */
+.line-pup,.pinecone { display:none !important; }
+.hero.letter-opening { max-width:none; min-height:100svh; align-items:center; justify-content:center; text-align:center; padding:6rem 1.4rem 4rem; overflow:hidden; }
+.hero.letter-opening::before { display:none; }.hero.letter-opening::after { content:""; position:absolute; inset:10% 7%; border:1px solid color-mix(in srgb,var(--accent) 26%,transparent); border-radius:50%; pointer-events:none; }
+.hero-photo { width:min(260px,66vw); aspect-ratio:1/1.12; margin:0 0 1.55rem; border-radius:999px 999px 24px 24px; overflow:hidden; position:relative; z-index:1; box-shadow:0 24px 64px rgba(0,0,0,.35); border:5px solid color-mix(in srgb,var(--card) 70%,transparent); }
+.hero-photo img { width:100%; height:100%; object-fit:cover; display:block; }
+.hero.letter-opening h1 { max-width:15ch; margin:0; color:var(--text); font-size:clamp(2.2rem,8vw,4.7rem); line-height:1.12; letter-spacing:-.055em; position:relative; z-index:1; }
+.hero-whisper { position:relative; z-index:1; margin:1.05rem 0 1.45rem; color:var(--muted); font-size:.92rem; letter-spacing:.13em; }
+.enter-letter { position:relative; z-index:1; min-height:46px; padding:.75rem 1.15rem; border:1px solid var(--accent2); border-radius:999px; background:transparent; color:var(--accent); font:700 .82rem/1 ui-rounded,"Microsoft YaHei",sans-serif; cursor:pointer; transition:.25s ease; }.enter-letter:hover { background:var(--accent2); color:#031914; transform:translateY(-2px); }
+.dog-scene { pointer-events:none; position:absolute; z-index:2; display:flex; align-items:end; justify-content:center; gap:.25rem; }.dog-scene img { object-fit:contain; filter:drop-shadow(0 9px 12px rgba(0,0,0,.22)); }.dog-peek { bottom:1.25rem; right:clamp(1rem,7vw,6rem); width:126px; }.dog-peek img { width:62px; }.dog-peek img:last-child { width:68px; margin-left:-21px; transform:rotate(7deg); }
+.act-marker { max-width:1060px; margin:0 auto; padding:2rem clamp(1.3rem,5vw,4rem) .4rem; color:var(--accent2); display:flex; align-items:center; gap:.85rem; letter-spacing:.14em; font-size:.8rem; }.act-marker::after { content:""; height:1px; background:var(--line); flex:1; }.act-marker span { opacity:.62; }.act-marker strong { color:var(--text); font-size:1.05rem; letter-spacing:.06em; }
+.travel-reveal { background:transparent; border:0; box-shadow:none; padding:0; overflow:visible; }.travel-reveal::before { content:none; }.travel-intro { margin-bottom:1rem; }.travel-intro p:last-child { font-size:.95rem; }.travel-toggle { background:var(--accent2); color:#031914; }.travel-grid { display:block; min-height:280px; }.travel-shot,.travel-shot:nth-child(n),.travel-reveal.is-open .travel-shot,.travel-reveal.is-open .travel-shot:nth-child(n) { display:none !important; width:100%; margin:0; padding:0; aspect-ratio:4/3; border-radius:20px; overflow:hidden; }.travel-shot.is-current { display:block !important; animation:photoArrive .55s ease both; }.travel-shot img { width:100%; height:100%; object-fit:cover; }.travel-count { text-align:center; margin-top:.85rem; font-size:.76rem; } @keyframes photoArrive { from { opacity:0; transform:scale(.97) translateY(10px); } to { opacity:1; transform:scale(1) translateY(0); } }
+.carrot-poem { position:relative; overflow:hidden; }.carrot-poem .dog-scene { right:clamp(1.1rem,8vw,7rem); bottom:1.3rem; width:122px; }.carrot-poem .dog-scene img { width:100%; animation:dogDance 2.8s ease-in-out infinite; } @keyframes dogDance { 0%,100% { transform:rotate(-2deg) translateY(0); } 50% { transform:rotate(3deg) translateY(-7px); } }
+.finale { position:relative; overflow:hidden; }.finale .dog-scene { bottom:5.2rem; left:50%; transform:translateX(-50%); width:128px; }.finale .dog-scene img { width:100%; }.secret-trigger { appearance:none; border:0; background:none; color:var(--accent2); font:inherit; font-size:clamp(1.25rem,3vw,1.75rem); font-weight:800; cursor:pointer; padding:.7rem; }.secret-letter { width:min(240px,62vw); max-height:0; opacity:0; overflow:hidden; margin:0 auto; border-radius:18px; transition:max-height .8s ease,opacity .5s ease,margin .5s ease; }.secret-letter.is-revealed { max-height:350px; opacity:1; margin:1.2rem auto 0; }.secret-letter img { width:100%; display:block; border-radius:18px; box-shadow:var(--shadow); }
+@media (max-width:680px) { .hero.letter-opening { padding-top:4rem; }.hero-photo { width:220px; }.dog-peek { bottom:.75rem; right:.5rem; transform:scale(.82); transform-origin:bottom right; }.act-marker { padding-top:1.6rem; }.travel-grid { min-height:230px; }.carrot-poem .dog-scene { width:90px; right:.4rem; bottom:.55rem; opacity:.85; }.finale .dog-scene { bottom:4.3rem; width:105px; } }
+@media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; animation-duration:.01ms!important; } }
 </style>
 </head>
 <body>
+<!-- 全新的章节入口：内容仍按原始时间线完整保留在下方 -->
+<nav class="story-nav" aria-label="纪念网站工具栏">
+  <button type="button" id="chaptersButton" aria-expanded="false" aria-controls="chapterDrawer">章节</button>
+  <button type="button" id="themeButton" aria-label="切换明暗主题">◐</button>
+</nav>
+<aside class="chapter-drawer" id="chapterDrawer" aria-label="故事章节"></aside>
+<div class="line-pup pup-a" aria-hidden="true"><span class="pup-ear left"></span><span class="pup-ear right"></span><span class="pup-head"></span><span class="pup-tail"></span></div>
+<div class="line-pup pup-b" aria-hidden="true"><span class="pup-ear left"></span><span class="pup-ear right"></span><span class="pup-head"></span><span class="pup-tail"></span></div>
+<div class="line-pup pup-c" aria-hidden="true"><span class="pup-ear left"></span><span class="pup-ear right"></span><span class="pup-head"></span><span class="pup-tail"></span></div>
+<div class="line-pup pup-d" aria-hidden="true"><span class="pup-ear left"></span><span class="pup-ear right"></span><span class="pup-head"></span><span class="pup-tail"></span></div>
+<div class="line-pup pup-e" aria-hidden="true"><span class="pup-ear left"></span><span class="pup-ear right"></span><span class="pup-head"></span><span class="pup-tail"></span></div>
+
+<!-- Floating pinecones -->
+<span class="pinecone" style="top:12%;left:5%;">🐿️</span>
+<span class="pinecone" style="top:30%;right:4%;">🐿️</span>
+<span class="pinecone" style="top:55%;left:3%;">🐿️</span>
+<span class="pinecone" style="top:70%;right:6%;">🐿️</span>
+<span class="pinecone" style="top:85%;left:7%;">🐿️</span>
+<span class="pinecone" style="top:45%;right:3%;">🐿️</span>
 
 <!-- ════════════════ HERO ════════════════ -->
-<section class="hero">
-  <h1>遇见你之前<br>我不会写喜欢</h1>
-  <p class="sub">胡昊 &amp; 高嘉阳 · 一周年</p>
-  <div class="days">
-    <span id="dayCount">…</span>
-    从相识到现在
+<section class="hero letter-opening">
+  <figure class="hero-photo"><img src="travel-photos/cover.webp" alt="你是我的风景"></figure>
+  <h1>遇见你之前，我不会写喜欢</h1>
+  <p class="hero-whisper">这一页，只交给你。</p>
+  <button class="enter-letter" type="button" id="enterLetter">翻开这封信 ↓</button>
+  <div class="dog-scene dog-peek" aria-hidden="true"><img src="stickers/transparent-line-dog-heart.gif" alt=""><img src="stickers/transparent-line-dog-cuddle.gif" alt=""></div>
+</section>
+
+<div class="act-marker"><span>01</span><strong>相遇</strong></div>
+
+<!-- ════════════════ 序章 · 告白 ════════════════ -->
+<section>
+  <div class="section-title reveal">序章 · 告白</div>
+  <div class="confession reveal">
+    <p>你是我<em>才下眉头又上心头</em>的喜欢</p>
+    <div class="stanza-break"></div>
+    <p>书到用时方恨少</p>
+    <p>想你却有各种理由：</p>
+    <p>喜欢你也一样</p>
+    <p>转身时的微笑</p>
+    <p>俯身时的发梢</p>
+    <p>每一声弟弟；</p>
+    <p>每一声姐姐；</p>
+    <p>统统喜欢</p>
+    <div class="stanza-break"></div>
+    <p>院里的百合花</p>
+    <p>缸中的小白花</p>
+    <p>抬头看到的藻井宫阙</p>
+    <p>红墙斗拱托起的脊兽</p>
+    <p>都是很好很好的</p>
+    <p>可我<em>偏偏不喜欢</em></p>
+    <p>没有你的镜头</p>
+    <div class="stanza-break"></div>
+    <p>时间被定格</p>
+    <p>你在 花会摇曳</p>
+    <p>风会吹起屋檐的铜铃</p>
+    <p>雁门关旗帜招展</p>
+    <div class="stanza-break"></div>
+    <p>你在 松鼠会跳</p>
+    <p>泉水环绕 小和尚没头发</p>
+    <p>神龙也会张大嘴巴</p>
+    <div class="stanza-break"></div>
+    <p>你在 <em class="pine">松子才会掉</em></p>
+    <p>壁画才会动</p>
+    <p><em>我才会笑</em></p>
+    <div class="stanza-break"></div>
+    <p>你看</p>
+    <p>我不会轻易喜欢别人</p>
+    <p>但你让我的世界</p>
+    <p><em>动了起来</em></p>
+    <div class="stanza-break"></div>
+    <p>我喜欢你</p>
   </div>
-  <div class="scroll-hint">↓ 向下翻阅我们的故事</div>
 </section>
 
 <!-- ════════════════ 第一章 · 初见 ════════════════ -->
@@ -290,7 +543,7 @@
     <div class="sig">—— 2025年8月，山西大同</div>
   </div>
   <div class="photo-inline reveal">
-    <img src="1.jpg" alt="初见" onclick="openLightbox('1.jpg','古都客相逢 共沐旧时光')">
+    <img src="travel-photos/cover.webp" alt="初见" onclick="openLightbox('travel-photos/cover.webp','古都客相逢 共沐旧时光')">
     <div class="caption">古都客相逢 共沐旧时光</div>
   </div>
 </section>
@@ -340,12 +593,14 @@
   </div>
 </section>
 
+<div class="act-marker"><span>02</span><strong>心动</strong></div>
+
 <!-- ════════════════ 第五章 · 她的来信 ════════════════ -->
 <section>
   <div class="section-title reveal">第五章 · 她的来信</div>
   <div class="letters">
     <div class="letter reveal">
-      <div class="from">📨 高嘉阳 · 2026年3月24日 凌晨4:01</div>
+      <div class="from">📨 Jasmine · 2026年3月24日 凌晨4:01</div>
       <p>Hi我的小鸡毛，不知道你睡的是否踏实，梦是否香甜。显然，是我，此时还清醒。想念，让我无法入睡。</p>
       <p>兜兜转转，今天是我们在一起的第226天，我们认识的第233天。7个月的时间好像并没有磨平我们的爱意，反而让我在深夜因为喷涌而来的思念哭到无法入睡。</p>
       <p>35岁的年纪，我才没有想过我会因为一个男孩子哭到失眠。35岁的年纪，我才不会承认因为思念一遍遍泪流满面。</p>
@@ -356,7 +611,7 @@
     </div>
     <div class="letter reveal">
       <div class="from">✉️ 胡昊 · 回信</div>
-      <p>亲爱的，选择你，是我人生中最坚定的一件事。你问我为何，我沉默不语，苍白的语言和知识的贫瘠无法表达其万一，用命运做解。</p>
+      <p>亲爱的 Jasmine，选择你，是我人生中最坚定的一件事。你问我为何，我沉默不语，苍白的语言和知识的贫瘠无法表达其万一，用命运做解。</p>
       <p>心理学讲薄片撷取效应：人类大脑能在极短时间内通过碎片信息形成对他人性格、可信度的准确判断。短暂的相处已经激活我迟钝的大脑，你的思想，你的真诚，你的疲惫，你的笑容，你的倾听，你的情绪，一切的一切与我内心深处那个模糊的、我不曾察觉过的身影逐渐重合，具像了我对爱情的抽象想象。</p>
       <p>和你讲话是如此自由，我第一次感到做真实的自己是被全然接纳的，不用表演，不必隐藏。你恰好出现在我需要的灵魂坐标，和你一起，我有足够的欲望和创造力。</p>
       <p>我可以确定的是，我的基因选择了你，从多巴胺到荷尔蒙；我的灵感选择了你，从文字到表达；我的动物性选择了你，从本能到欲望；我的神性选择了你，你是我追求的真善美，是我的超越。</p>
@@ -366,9 +621,23 @@
   </div>
 </section>
 
+<div class="act-marker"><span>03</span><strong>想念</strong></div>
+
 <!-- ════════════════ 中秋夜雨 ════════════════ -->
-<section>
+<section class="wandering-words">
   <div class="section-title reveal">中秋夜雨</div>
+  <div class="wandering-copy reveal">
+    <p>第二天了，还是睡不着。离了你，就像今晚云遮了月，从点点滴滴听到叶叶声声，还是无法睡去。</p>
+    <p>相爱以来，只觉光阴寸短，看你不够，听你不够，想你不够，睡眠也不够。不曾想竟连日辗转难眠。</p>
+    <p>是无法入睡，好像少了什么——像挠不到的背。是在身边的拥抱，半夜醒来的吻，梦中也要贴贴；是在电话那头的娇嗔，夜半时分，努力去听你的呼吸。</p>
+    <p>我好想你，日出日落，黄昏三更。</p>
+    <p>困了，看见你的消息，知道你也睡不着，知道你现在睡去了。我也该睡了，晚安。</p>
+  </div>
+</section>
+
+<!-- ════════════════ 爱的胡萝卜汁 ════════════════ -->
+<section class="carrot-poem">
+  <div class="section-title reveal">爱的胡萝卜汁</div>
   <div class="poem reveal">
     <p>再一次坐在教室</p>
     <p>坐在你身边</p>
@@ -404,22 +673,8 @@
     <p>我会驾着七彩祥云</p>
     <p>为你披上万丈霞光</p>
     <p>生生世世</p>
-    <div class="sig" style="text-align:center;margin-top:2rem;">—— 乙巳年中秋 · 2025年9月6日</div>
   </div>
-</section>
-
-<!-- ════════════════ 失眠夜 ════════════════ -->
-<section>
-  <div class="section-title reveal">失眠夜</div>
-  <div class="quote-card reveal">
-    <p>第二天了，还是睡不着。离了你，就像今晚云遮了月，从点点滴滴听到叶叶声声，还是无法睡去。</p>
-    <p>相爱以来，只觉光阴寸短，看你不够，听你不够，想你不够，睡眠也不够。不曾想竟连日辗转难眠。这种失眠不是梦里听到你的呼唤骤然醒来；不是在你身侧默默流泪到天明；不是感应于你，百转千回。</p>
-    <p>是无法入睡，好像少了什么——像挠不到的背。是在身边的拥抱，半夜醒来的吻，梦中也要贴贴；是在电话那头的娇嗔，夜半时分，努力去听你的呼吸。</p>
-    <p>我好想你，日出日落，黄昏三更。</p>
-    <p>困了，看见你的消息，知道你也睡不着，知道你现在睡去了。我也该睡了，晚安。</p>
-    <p>原来还是我们的感应。</p>
-    <div class="sig">—— 乙巳年中秋 夜雨随笔 · 2025年10月7日</div>
-  </div>
+  <div class="dog-scene" aria-hidden="true"><img src="stickers/transparent-line-dog-dance.gif" alt=""></div>
 </section>
 
 <!-- ════════════════ 喜欢到爱 ════════════════ -->
@@ -429,12 +684,7 @@
     <p>喜欢到爱要走多远呢？魂牵梦绕算不算爱呢？是早起发现被你拉黑之后痛彻心扉吗？是第一次争吵之后的魂不附体吗？</p>
     <p>我很难过，因为你不开心，我尝试解决但搞砸了。我不懂感情，不懂女人，不懂什么时候该讲什么话。我也不是傻子，也会讨别人开心，但总让你落泪，我的心都碎了。</p>
     <p>我太笨拙，不擅长情绪提供，在你需要倾听的时候打扰你，我很抱歉。我没有站在道德里，我只想站在你背后。如果我没有做到，原谅我，我会做到的，一辈子。我要倾听你的喜怒哀乐，和你一起消化所有情绪，这是我给你的承诺。</p>
-    <p>你问我是什么时候爱上你，我想了很多个瞬间。</p>
-    <p>8月11号那天早上，痛哭流涕，一遍又一遍给你写信。后来你反复给我道歉，宿醉的周一，也要时时找我，怕我不开心。也是那天第一次说爱你。</p>
-    <p>是在西安，我反复求导，明悟我的心。那天晚上痛的刻骨铭心。</p>
-    <p>是在南京，我们的七夕，我们的热情。</p>
-    <p>是上海，你哭的上气不接下气，我心都碎了。</p>
-    <p>是向我的爷爷奶奶介绍你，踯躅已久，下定决心告诉我的父母长辈。</p>
+    <p>你问我是什么时候爱上你，我想了很多个瞬间。8月11号那天早上，痛哭流涕，一遍又一遍给你写信。是在西安，我反复求导，明悟我的心。是在南京，我们的七夕，我们的热情。是上海，你哭的上气不接下气，我心都碎了。是向我的爷爷奶奶介绍你，踯躇已久，下定决心告诉我的父母长辈。</p>
     <p>太多太多，我不确定是哪一个瞬间。但我确定，<em>日复一日，爱在生长。</em></p>
     <p>我爱你，我愿意改变。我要做到我的承诺，不要剥夺我的权利。</p>
     <div class="sig">—— 2025年11月2日</div>
@@ -445,7 +695,7 @@
 <section>
   <div class="section-title reveal">致Jasmine · 第一百个落日</div>
   <div class="poem reveal">
-    <p>我的Jasmine，</p>
+    <p>我的 Jasmine，</p>
     <p>100次落日，100个爱你的夜。</p>
     <div class="stanza-break"></div>
     <p>你是</p>
@@ -464,22 +714,6 @@
     <p>从别后，忆相逢，几回魂梦与君同。</p>
     <div class="meta">—— 晏几道 · 2025年11月8日</div>
   </div>
-</section>
-
-<!-- ════════════════ 我们的瞬间 ════════════════ -->
-<section>
-  <div class="section-title reveal">我们的瞬间</div>
-  <div class="gallery reveal" id="gallery">
-    <div class="gallery-item"><img src="1.jpg" alt="初见" onclick="openLightbox('1.jpg','古都客相逢 共沐旧时光')"></div>
-    <div class="gallery-item"><img src="2.jpg" alt="南京" onclick="openLightbox('2.jpg','你是我的风景')"></div>
-    <div class="gallery-item" id="photo3" style="display:none"><img src="photo_3.jpg" alt="" onclick="openLightbox('photo_3.jpg','')"></div>
-    <div class="gallery-item" id="photo4" style="display:none"><img src="photo_4.jpg" alt="" onclick="openLightbox('photo_4.jpg','')"></div>
-    <div class="gallery-item" id="photo5" style="display:none"><img src="photo_5.jpg" alt="" onclick="openLightbox('photo_5.jpg','')"></div>
-    <div class="gallery-item" id="photo6" style="display:none"><img src="photo_6.jpg" alt="" onclick="openLightbox('photo_6.jpg','')"></div>
-    <div class="gallery-item" id="photo7" style="display:none"><img src="photo_7.jpg" alt="" onclick="openLightbox('photo_7.jpg','')"></div>
-    <div class="gallery-item" id="photo8" style="display:none"><img src="photo_8.jpg" alt="" onclick="openLightbox('photo_8.jpg','')"></div>
-  </div>
-  <p style="text-align:center;font-size:0.78rem;color:var(--muted);margin-top:1.5rem;letter-spacing:0.06em;">📷 把更多照片放入文件夹，命名为 photo_3.jpg、photo_4.jpg……即可出现</p>
 </section>
 
 <!-- ════════════════ 第六章 · 遇见你之前 ════════════════ -->
@@ -554,17 +788,33 @@
   </div>
 </section>
 
+<div class="act-marker"><span>04</span><strong>坚定</strong></div>
+
 <!-- ════════════════ 泽当错 · 命运的前奏 ════════════════ -->
 <section>
   <div class="section-title reveal">泽当错 · 命运的前奏</div>
   <div class="quote-card reveal">
     <p>我应不应该相信命运呢？</p>
-    <p>雷古神山，我爬到泽当错，到了这里才知道泽当两个字是爱情的意思。这里云雾昭昭，像仙气一般，但是我看不清这个湖的真面目。给你打完电话之后，云雾慢慢散去。但没有阳光的照射，没有五颜六色的湖面，也不过是很普通的冰晶。</p>
-    <p>若我信命信缘，它是要告诉我，迷雾散尽会看到湖面吗？半散不散的时候湖面才最美。是你的到来？是我们的到来？在马年第一个到达泽当错的人，是我们的到来，让湖面的雾被驱散了？还是和你结束通话之后，雾才被驱散？</p>
-    <p>要我说，那也不过是最简单的，正常的天气现象。哎，它并没有攀登时一路攀登时，沿途的风景美丽。还是说，它会在有阳光的日子里，才会显出它最美的样子？</p>
-    <div class="sig">—— 2025年3月8日，雷古神山</div>
+    <p>雷古神山，我爬到泽当错，到了这里才知道泽当两个字是爱情的意思。这里云雾昭昭，像仙气一般，但是我看不清这个湖的真面目。给你打完电话之后，云雾慢慢散去。</p>
+    <p>若我信命信缘，它是要告诉我，迷雾散尽会看到湖面吗？半散不散的时候湖面才最美。是你的到来？是我们的到来？</p>
+    <p>要我说，那也不过是最简单的，正常的天气现象。还是说，它会在有阳光的日子里，才会显出它最美的样子？</p>
   </div>
-  <p style="text-align:center;font-size:0.8rem;color:var(--muted);margin-top:1rem;letter-spacing:0.06em;">* 这是遇见你之前的五个月。那时我还不知道，命运已经在准备了。</p>
+</section>
+
+<!-- ════════════════ 相册 ════════════════ -->
+<section>
+  <div class="section-title reveal">照片卷</div>
+  <div class="travel-reveal reveal" id="travelReel">
+    <div class="travel-intro">
+      <div>
+        <p class="travel-kicker">把这一卷推开</p>
+        <p>有些瞬间，适合被慢慢看见。</p>
+      </div>
+      <button class="travel-toggle" id="travelToggle" type="button" aria-label="查看下一张照片">翻开第一张 →</button>
+    </div>
+    <div class="travel-grid" id="travelGrid" aria-live="polite"></div>
+    <p class="travel-count" id="travelCount">照片 1 / 50</p>
+  </div>
 </section>
 
 <!-- ════════════════ 第七章 · 双城记 ════════════════ -->
@@ -575,7 +825,7 @@
     <p>我比过去二十多年的任何一刻都更清醒地意识到：必须踩实地面，绝不能犯错。于是，我进一步迸发工作的热情，不再因"实名"而羞耻；我更加清晰自己的责任——这是我的个人品牌力，我要让所有人重新认识我。</p>
     <p>我想做成这件事——为了我们俩更好的生活质量，为了减轻你对未来的焦虑，让你拥有更多的笑脸。</p>
     <p><em>永远爱你，永远热泪盈眶。</em></p>
-    <div class="sig">—— 2026年 · 广州 → 上海</div>
+    <div class="sig">—— 2026年 · 兰州 → 上海</div>
   </div>
 </section>
 
@@ -595,7 +845,7 @@
 <section>
   <div class="section-title reveal">生气与心疼</div>
   <div class="quote-card reveal">
-    <p>我生气，你怎么可以一个晚上不找我，是在学习吗，我很心酸，你知道我不会打扰你的。不是工作，你从来不会因为工作不理我。我也在工作学习，有效率有质量的，但我一直在想你。睡着了吗？你知道我会很担心的。我很难过，你疲惫到忘记我。</p>
+    <p>我生气，你怎么可以一个晚上不找我，是在学习吗，我很心酸，你知道我不会打扰你的。不是工作，你从来不会因为工作不理我。我也在工作学习，有效率有质量的，但我一直在想你。我很难过，你疲惫到忘记我。</p>
     <p>我在生气，你又在依赖酒精。你知道它会伤害你的身体，解决不了问题，也可能让你的情绪更加糟糕。</p>
     <p>我很生气，你怎么可以偷偷难过，讲不想让我担心，你明明知道我一直在牵挂你。</p>
     <p>我生气，叔叔阿姨在离开之后和你沟通，在逃避什么？与你可能的正面冲突？他们有用什么方式爱你？遥遥万里，他们会像我感应到你的难过吗？感应到几分？</p>
@@ -614,19 +864,7 @@
     <p>你是我的内心的本真。每时每刻都是你，远处的群山，脚下的黄河，天上的月亮，屏幕中的游戏，喧闹的集市，还有夜晚的梦。无论在哪里，无论去向何方，都想你在我身边。</p>
     <p>我爱你。我对情人节并不感冒，没有鹊桥相会的古老浪漫，没有520的朗朗上口，更没有我们相遇、我们相爱的那天，刻骨铭心。但有了你，<em>每天都是情人节。</em></p>
     <p>如果浪漫终将不可避免的走向庸俗，<em>让我们一起，庸俗到老。</em></p>
-    <div class="sig">—— 2026年2月13日</div>
-  </div>
-</section>
-
-<!-- ════════════════ 我们的视频 ════════════════ -->
-<section>
-  <div class="section-title reveal">属于我们的画面</div>
-  <div class="video-wrap reveal">
-    <video controls preload="metadata" poster="1.jpg">
-      <source src="video1.mp4" type="video/mp4">
-      您的浏览器不支持视频播放。
-    </video>
-    <div class="caption">每一个瞬间，都是我想念你的理由</div>
+    <div class="sig">—— 2026年2月13日 · 兰州</div>
   </div>
 </section>
 
@@ -655,22 +893,190 @@
         <div class="song-desc">520 纪念曲 · 我不会写喜欢</div>
       </div>
     </div>
+    <div class="song-card" onclick="switchSong('爱的胡萝卜.mp3', this)">
+      <div class="play-icon">▶</div>
+      <div class="song-info">
+        <div class="song-name">爱的胡萝卜</div>
+        <div class="song-desc">买一杯爱的胡萝卜汁 · 少年一样的我们</div>
+      </div>
+    </div>
+    <div class="song-card" onclick="switchSong('爱的胡萝卜2.mp3', this)">
+      <div class="play-icon">▶</div>
+      <div class="song-info">
+        <div class="song-name">爱的胡萝卜 II</div>
+        <div class="song-desc">续杯 · 给你最甜的</div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ════════════════ 老婆备忘录 ════════════════ -->
-<section>
-  <div class="section-title reveal">老婆备忘录</div>
-  <div class="memo-wrap reveal">
-    <p style="font-size:0.9rem;color:var(--muted);margin-bottom:1.5rem;letter-spacing:0.06em;">📋 关于你的一切，都在我的备忘录里</p>
-    <button class="memo-toggle" onclick="toggleMemo()" id="memoBtn">展开看看 →</button>
-    <div class="memo-content" id="memoContent">
-      <div class="memo-item"><span class="memo-date">8月26日</span>没有吹头发，说不会疼。20分钟后头疼去吹头发</div>
-      <div class="memo-item"><span class="memo-date">9月3日</span>下午喝冰奶茶，胃不舒服</div>
-      <div class="memo-item"><span class="memo-date">9月4日</span>喝完酒喝了红枣生姜茶，第二天早上没有头疼；中午回来头疼，咳嗽加重</div>
-      <div class="memo-item"><span class="memo-date">9月6日</span>老婆眼皮痒</div>
-      <div class="memo-item"><span class="memo-date">9月8日</span>老婆和阿姨生气，喝酒，趁我不注意多喝一瓶啤酒和一杯金酒。第二天早上头疼头晕，上班晚到还被总助盯着看，第二天还断片，一起处理的小小问题都忘了。生气💢</div>
-      <p style="text-align:center;font-size:0.78rem;color:var(--muted);margin-top:1.2rem;">—— 照顾好自己，亲爱的。我在盯着你呢。</p>
+<!-- ════════════════ 歌词本（不在网页展示） ════════════════ -->
+<section class="lyrics-archive" aria-hidden="true">
+  <div class="section-title reveal">歌词本 · 为你写下的歌</div>
+  <p style="text-align:center;font-size:0.85rem;color:var(--muted);margin-bottom:2rem;letter-spacing:0.06em;">三首等待谱曲的歌词，来自我们的故事</p>
+
+  <!-- B: 凌晨 -->
+  <div class="lyric-block reveal">
+    <div class="song-title">凌晨</div>
+    <div class="song-sub">2025.8.10 凌晨 · 在一起的那一夜</div>
+    <div class="lyric-section">
+      <div class="lyric-tag">「 前奏 · 黄河夜色 」</div>
+      <div class="lyric-line">黄河水 悄悄流过</div>
+      <div class="lyric-line">八月的夜 还热着</div>
+      <div class="lyric-line">手机屏幕亮了</div>
+      <div class="lyric-line">你的名字 在闪烁</div>
+    </div>
+    <div class="lyric-section">
+      <div class="lyric-tag">「 主歌 」</div>
+      <div class="lyric-line">这一夜和那一夜 有什么不同</div>
+      <div class="lyric-line">星星还是那颗星 风还是那阵风</div>
+      <div class="lyric-line">只是我对着屏幕 打下几个字</div>
+      <div class="lyric-line">心跳得 比黄河还汹涌</div>
+    </div>
+    <div class="lyric-section">
+      <div class="lyric-tag">「 预副歌 」</div>
+      <div class="lyric-line">我不会轻易喜欢别人</div>
+      <div class="lyric-line">我知道这句话有多重</div>
+      <div class="lyric-line">但你是例外</div>
+      <div class="lyric-line">你是凌晨三点 唯一的光</div>
+    </div>
+    <div class="lyric-section">
+      <div class="lyric-tag">「 副歌 」</div>
+      <div class="lyric-line">八月十号的凌晨</div>
+      <div class="lyric-line">世界安静得只剩你我</div>
+      <div class="lyric-line">我说我喜欢你</div>
+      <div class="lyric-line">像黄河水不会倒流</div>
+      <div class="lyric-line" style="margin-top:0.5rem;">八月十号的凌晨</div>
+      <div class="lyric-line">从此每个凌晨都是你</div>
+      <div class="lyric-line">你用一句"我也是"</div>
+      <div class="lyric-line">让我的世界 动了起来</div>
+    </div>
+    <div class="lyric-section">
+      <div class="lyric-tag">「 桥段 」</div>
+      <div class="lyric-line">不是冲动 不是寂寞</div>
+      <div class="lyric-line">是一个灵魂 认出了另一个</div>
+      <div class="lyric-line">在凌晨的黄河边</div>
+      <div class="lyric-line">我找到了 回家的路</div>
+    </div>
+    <div class="lyric-section">
+      <div class="lyric-tag">「 尾奏 」</div>
+      <div class="lyric-line">凌晨 凌晨</div>
+      <div class="lyric-line">你是我的第一个</div>
+      <div class="lyric-line">天亮</div>
+    </div>
+  </div>
+
+  <!-- C: 双城 · 茉莉与黄河 -->
+  <div class="lyric-block reveal">
+    <div class="song-title">双城 · 茉莉与黄河</div>
+    <div class="song-sub">Jasmine · Jasunny · Jasminight</div>
+    <div class="lyric-section">
+      <div class="lyric-tag">「 前奏 」</div>
+      <div class="lyric-line">黄河穿城而过 黄浦江灯火</div>
+      <div class="lyric-line">两个城市之间 隔着多少个我</div>
+    </div>
+    <div class="lyric-section">
+      <div class="lyric-tag">「 主歌 」</div>
+      <div class="lyric-line">兰州的早晨 从一碗面开始</div>
+      <div class="lyric-line">我想着你 在上海的地铁里</div>
+      <div class="lyric-line">黄河水黄了又清 清了又黄</div>
+      <div class="lyric-line">就像我想你 反反复复 没有尽头</div>
+    </div>
+    <div class="lyric-section">
+      <div class="lyric-tag">「 预副歌 」</div>
+      <div class="lyric-line">叫你 Jasmine 因为你是第一朵茉莉</div>
+      <div class="lyric-line">开在我荒芜的花园里</div>
+      <div class="lyric-line">叫你 Jasunny 因为你笑起来的时候</div>
+      <div class="lyric-line">连兰州的冬天都变暖了</div>
+    </div>
+    <div class="lyric-section">
+      <div class="lyric-tag">「 副歌 」</div>
+      <div class="lyric-line">你是白天的茉莉 Jasunny</div>
+      <div class="lyric-line">夜晚的茉莉 Jasminight</div>
+      <div class="lyric-line">开在我每一个失眠里</div>
+      <div class="lyric-line">从黄河到黄浦江</div>
+      <div class="lyric-line" style="margin-top:0.5rem;">你是白天的茉莉 Jasunny</div>
+      <div class="lyric-line">夜晚的茉莉 Jasminight</div>
+      <div class="lyric-line">一千四百公里的距离</div>
+      <div class="lyric-line">挡不住一朵花 要开的决心</div>
+    </div>
+    <div class="lyric-section">
+      <div class="lyric-tag">「 桥段 」</div>
+      <div class="lyric-line">茉莉茉莉 小小的白色的花</div>
+      <div class="lyric-line">黄河黄河 从西流到东</div>
+      <div class="lyric-line">我在黄河的这一头</div>
+      <div class="lyric-line">想着黄浦江边的你</div>
+      <div class="lyric-line" style="margin-top:0.5rem;">如果我是一粒<em class="pine">松果</em></div>
+      <div class="lyric-line">就掉在 你经过的</div>
+      <div class="lyric-line">每一个路口</div>
+    </div>
+    <div class="lyric-section">
+      <div class="lyric-tag">「 尾奏 」</div>
+      <div class="lyric-line">Jasmine, Jasunny, Jasminight</div>
+      <div class="lyric-line">无论叫哪个名字</div>
+      <div class="lyric-line">都是我爱你的样子</div>
+    </div>
+  </div>
+
+  <!-- D: 带湖垣 · 告白 -->
+  <div class="lyric-block reveal">
+    <div class="song-title">带湖垣 · 告白</div>
+    <div class="song-sub">歌词改编自 2025.8.10 凌晨告白 · 保留原文</div>
+    <div class="lyric-section">
+      <div class="lyric-tag">「 引子 · 清唱或笛箫独奏 」</div>
+      <div class="lyric-line">你是我</div>
+      <div class="lyric-line">才下眉头又上心头</div>
+      <div class="lyric-line">的喜欢</div>
+    </div>
+    <div class="lyric-section">
+      <div class="lyric-tag">「 主歌 · 慢板 」</div>
+      <div class="lyric-line">书到用时方恨少</div>
+      <div class="lyric-line">想你却有各种理由</div>
+      <div class="lyric-line">喜欢你也一样</div>
+      <div class="lyric-line">转身时的微笑</div>
+      <div class="lyric-line">俯身时的发梢</div>
+      <div class="lyric-line">每一声弟弟</div>
+      <div class="lyric-line">每一声姐姐</div>
+      <div class="lyric-line">统统喜欢</div>
+    </div>
+    <div class="lyric-section">
+      <div class="lyric-tag">「 预副歌 · 渐强 」</div>
+      <div class="lyric-line">院里的百合花</div>
+      <div class="lyric-line">缸中的小白花</div>
+      <div class="lyric-line">抬头看到的藻井宫阙</div>
+      <div class="lyric-line">红墙斗拱托起的脊兽</div>
+      <div class="lyric-line">都是很好很好的</div>
+      <div class="lyric-line">可我偏偏不喜欢</div>
+      <div class="lyric-line">没有你的镜头</div>
+    </div>
+    <div class="lyric-section">
+      <div class="lyric-tag">「 副歌 · 国风 」</div>
+      <div class="lyric-line">时间被定格</div>
+      <div class="lyric-line">你在 花会摇曳</div>
+      <div class="lyric-line">风会吹起屋檐的铜铃</div>
+      <div class="lyric-line">雁门关旗帜招展</div>
+      <div class="lyric-line" style="margin-top:0.5rem;">你在 松鼠会跳</div>
+      <div class="lyric-line">泉水环绕</div>
+      <div class="lyric-line">神龙也会张大嘴巴</div>
+    </div>
+    <div class="lyric-section">
+      <div class="lyric-tag">「 桥段 · 留白 」</div>
+      <div class="lyric-line">你在 <em class="pine">松子才会掉</em></div>
+      <div class="lyric-line">壁画才会动</div>
+      <div class="lyric-line">我才会笑</div>
+    </div>
+    <div class="lyric-section">
+      <div class="lyric-tag">「 副歌 · 再现 」</div>
+      <div class="lyric-line">你看</div>
+      <div class="lyric-line">我不会轻易喜欢别人</div>
+      <div class="lyric-line">但你让我的世界</div>
+      <div class="lyric-line">动了起来</div>
+    </div>
+    <div class="lyric-section">
+      <div class="lyric-tag">「 尾奏 · 渐弱 」</div>
+      <div class="lyric-line">我喜欢你</div>
+      <div class="lyric-line">我喜欢你</div>
+      <div class="lyric-line">我喜欢你……</div>
     </div>
   </div>
 </section>
@@ -678,21 +1084,16 @@
 <!-- ════════════════ 一周年 ════════════════ -->
 <section class="finale">
   <h2>一周年</h2>
-  <div class="big-date reveal">2025.8.10<br>—<br>2026.8.10</div>
+  <div class="big-date reveal">2025.8.10 凌晨<br>—<br>2026.8.10</div>
   <p class="closing reveal">
-    从山西佛寺的初见，到南京的落日；<br>
-    从你的第一封信，到我写下的每一句情话；<br>
-    从广州到上海，隔着千里，<br>
-    但每一次想起你，都是一次重逢。<br><br>
-    <em>我爱你，高嘉阳。</em><br>
-    一周年快乐。<br>
-    <span style="font-size:0.85rem;display:block;margin-top:1rem;">如果浪漫终将不可避免的走向庸俗，<br>让我们一起，庸俗到老。</span>
+    <button class="secret-trigger" id="secretTrigger" type="button" aria-expanded="false" aria-label="长按打开最后一页">从未如此坚定。</button>
   </p>
+  <div class="secret-letter" id="secretLetter"><img src="travel-photos/photo-50.webp" alt="只给你的最后一页"></div>
+  <div class="dog-scene" aria-hidden="true"><img src="stickers/transparent-line-dog-cuddle.gif" alt=""></div>
 </section>
 
 <footer>
-  胡昊 ❤ 高嘉阳 · 2025.8.10 — 2026.8.10<br>
-  距离打不败浪漫
+  胡昊 ❤ Jasmine · 2025.8.10 凌晨 — 2026.8.10
 </footer>
 
 <!-- ════════════════ Lightbox ════════════════ -->
@@ -704,7 +1105,7 @@
 
 <!-- ════════════════ Music Player ════════════════ -->
 <audio id="bgm" loop preload="auto">
-  <source src="出水芙蓉.mp3" type="audio/mpeg">
+  <source src="爱的胡萝卜2.mp3" type="audio/mpeg">
 </audio>
 <button class="music-btn playing" id="musicToggle" onclick="toggleMusic()" title="音乐开关">🎵</button>
 
@@ -731,13 +1132,6 @@
     document.querySelectorAll('.song-card .play-icon').forEach(icon => icon.textContent = '▶');
     el.querySelector('.play-icon').textContent = '♪';
   }
-
-  /* ── Day counter ── */
-  (function(){
-    const start = new Date('2025-08-04');
-    const diffDays = Math.floor((Date.now() - start) / 864e5);
-    document.getElementById('dayCount').textContent = diffDays;
-  })();
 
   /* ── Lightbox ── */
   function openLightbox(src, caption) {
@@ -770,19 +1164,126 @@
     document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
   })();
 
-  /* ── Auto-show available photos ── */
-  (function(){
-    for (let i = 3; i <= 20; i++) {
-      const el = document.getElementById('photo' + i);
-      if (!el) continue;
-      const img = el.querySelector('img');
-      if (!img) continue;
-      const testImg = new Image();
-      testImg.onload = function() { el.style.display = ''; };
-      testImg.onerror = function() {};
-      testImg.src = img.src;
+</script>
+<script>
+/* 新版星图导航与主题：不修改任何原有正文 */
+(function () {
+  const drawer = document.getElementById('chapterDrawer');
+  const menuButton = document.getElementById('chaptersButton');
+  const themeButton = document.getElementById('themeButton');
+  const sections = Array.from(document.querySelectorAll('section')).filter(section => !section.classList.contains('lyrics-archive'));
+  const fallback = ['序章 · 告白', '初见', '写给你的信', '中秋夜雨', '我们的瞬间', '泽当错', '照片卷', '为你写的歌', '一周年'];
+  sections.forEach((section, index) => {
+    const heading = section.querySelector('.section-title, h2');
+    const label = heading ? heading.textContent.trim().replace(/\s+/g, ' ') : (fallback[index] || `故事 ${index + 1}`);
+    const id = `chapter-${index + 1}`;
+    section.id = id;
+    const link = document.createElement('a');
+    link.href = `#${id}`;
+    link.textContent = label;
+    link.addEventListener('click', () => {
+      drawer.classList.remove('open');
+      menuButton.setAttribute('aria-expanded', 'false');
+    });
+    drawer.appendChild(link);
+  });
+  menuButton.addEventListener('click', () => {
+    const open = drawer.classList.toggle('open');
+    menuButton.setAttribute('aria-expanded', String(open));
+  });
+  document.addEventListener('click', (event) => {
+    if (!drawer.contains(event.target) && !menuButton.contains(event.target)) {
+      drawer.classList.remove('open');
+      menuButton.setAttribute('aria-expanded', 'false');
     }
-  })();
+  });
+  const root = document.documentElement;
+  const savedTheme = localStorage.getItem('anniversary-theme');
+  if (savedTheme) root.dataset.theme = savedTheme;
+  themeButton.addEventListener('click', () => {
+    const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+    root.dataset.theme = next;
+    localStorage.setItem('anniversary-theme', next);
+  });
+})();
+</script>
+<script>
+/* 照片卷：一次只出现一个瞬间。 */
+(function () {
+  const grid = document.getElementById('travelGrid');
+  const button = document.getElementById('travelToggle');
+  const count = document.getElementById('travelCount');
+  if (!grid || !button || !count) return;
+  const shots = Array.from({ length: 50 }, (_, index) => String(index + 1).padStart(2, '0'));
+  let current = 0;
+  const items = [];
+  shots.forEach((number, index) => {
+    const item = document.createElement('button');
+    item.type = 'button';
+    item.className = `travel-shot${index === 0 ? ' is-current' : ''}`;
+    item.setAttribute('aria-label', `打开照片 ${index + 1}`);
+    const image = document.createElement('img');
+    image.loading = index === 0 ? 'eager' : 'lazy';
+    image.src = `travel-photos/photo-${number}.webp`;
+    image.alt = `照片 ${index + 1}`;
+    item.appendChild(image);
+    item.addEventListener('click', () => openLightbox(image.src, image.alt));
+    grid.appendChild(item);
+    items.push(item);
+  });
+  button.addEventListener('click', () => {
+    items[current].classList.remove('is-current');
+    current = (current + 1) % items.length;
+    items[current].classList.add('is-current');
+    count.textContent = `照片 ${current + 1} / ${items.length}`;
+    button.textContent = current === items.length - 1 ? '从头翻阅 ↺' : '下一张 →';
+  });
+})();
+</script>
+<script>
+/* 私人情书的进入与最后一页彩蛋。 */
+(function () {
+  const enter = document.getElementById('enterLetter');
+  const firstAct = document.querySelector('.act-marker');
+  if (enter && firstAct) enter.addEventListener('click', () => firstAct.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+
+  const trigger = document.getElementById('secretTrigger');
+  const letter = document.getElementById('secretLetter');
+  if (!trigger || !letter) return;
+  let holdTimer;
+  const reveal = () => {
+    letter.classList.add('is-revealed');
+    trigger.setAttribute('aria-expanded', 'true');
+  };
+  const startHold = () => { holdTimer = window.setTimeout(reveal, 800); };
+  const stopHold = () => { window.clearTimeout(holdTimer); };
+  trigger.addEventListener('pointerdown', startHold);
+  ['pointerup', 'pointerleave', 'pointercancel'].forEach(event => trigger.addEventListener(event, stopHold));
+  trigger.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') reveal(); });
+
+  const finale = document.querySelector('.finale');
+  let faded = false;
+  const fadeMusic = () => {
+    if (faded) return;
+    faded = true;
+    const audio = document.getElementById('bgm');
+    const button = document.getElementById('musicToggle');
+    const timer = window.setInterval(() => {
+      audio.volume = Math.max(0, audio.volume - 0.035);
+      if (audio.volume <= 0) {
+        window.clearInterval(timer);
+        audio.pause();
+        button.classList.remove('playing');
+        button.textContent = '🔇';
+      }
+    }, 150);
+  };
+  if (finale && 'IntersectionObserver' in window) {
+    new IntersectionObserver(entries => {
+      if (entries.some(entry => entry.isIntersecting)) fadeMusic();
+    }, { threshold: 0.72 }).observe(finale);
+  }
+})();
 </script>
 </body>
 </html>
